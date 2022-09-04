@@ -45,7 +45,7 @@ class FinanceConfig:
 
         from_date = "2012-11-31"
         to_date = "2015-11-31"
-        file_format =
+        file_format = json
         ========================================================================================
         DataIngestionConfig = namedtuple("DataIngestionConfig", ["from_date",
                                                                  "to_date",

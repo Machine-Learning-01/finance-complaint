@@ -1,11 +1,9 @@
-import logging
-from importlib.resources import path
 
 from finance_complaint.config import FinanceConfig
 from finance_complaint.entity.config_entity import DataIngestionConfig
 from finance_complaint.exception import FinanceException
 import os, sys
-from collections.abc import Generator
+
 import pandas as pd
 from finance_complaint.logger import logger
 import requests, json
@@ -13,6 +11,7 @@ from typing import List
 from collections import namedtuple
 import time
 import re
+import uuid
 
 DownloadUrl = namedtuple("DownloadUrl", ["url", "file_path", "n_retry"])
 
@@ -145,8 +144,7 @@ class DataIngestion:
 
             os.makedirs(download_dir, exist_ok=True)
 
-            data = requests.get(download_url.url, params={'User-agent': 'your bot 0.1'})
-
+            data = requests.get(download_url.url, params={'User-agent': f'your bot {uuid.uuid4()}'})
 
             try:
                 with open(download_url.file_path, "w") as file_obj:
@@ -158,7 +156,7 @@ class DataIngestion:
                     json.dump(finance_complaint_data, file_obj)
 
             except Exception as e:
-                #removing file failed file exist
+                # removing file failed file exist
                 if os.path.exists(download_url.file_path):
                     os.remove(download_url.file_path)
                 self.retry_download_data(data, download_url=download_url)
@@ -178,8 +176,7 @@ class DataIngestion:
             raise FinanceException(e, sys)
 
 
-
-def export_exiting_downloaded_data_to_parquet(download_dir,file_name,export_dir):
+def export_exiting_downloaded_data_to_parquet(download_dir, file_name, export_dir):
     try:
 
         config = FinanceConfig()
@@ -191,7 +188,7 @@ def export_exiting_downloaded_data_to_parquet(download_dir,file_name,export_dir)
         )
 
     except Exception as e:
-        raise FinanceException(e,sys)
+        raise FinanceException(e, sys)
 
 
 def main():
