@@ -52,7 +52,6 @@ class DataIngestion:
                 download_urls.append(download_url)
                 self.download_data(download_url=download_url)
             return download_urls
-
         except Exception as e:
             raise FinanceException(e, sys)
 
