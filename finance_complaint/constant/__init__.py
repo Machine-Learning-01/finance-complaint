@@ -9,4 +9,5 @@ TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 DATA_INGESTION_DIR = "data_ingestion"
 DATA_INGESTION_DOWNLOADED_DATA_DIR = "downloaded_dir"
 DATA_INGESTION_FILE_NAME = "finance_complaint"
-DATA_INGESTION_CSV_DATA_DIR = "csv_dir"
+DATA_INGESTION_DATA_DIR = "data_dir"
+DATA_INGESTION_FAILED_DIR = "failed_dir"

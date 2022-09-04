@@ -8,6 +8,7 @@ import requests
 import json
 from datetime import datetime
 
+
 class FinanceConfig:
 
     def __init__(self, pipeline_name=PIPELINE_NAME, timestamp=TIMESTAMP):
@@ -55,7 +56,7 @@ class FinanceConfig:
         """
         if to_date is None:
             to_date = datetime.now().strftime("%Y-%m-%d")
-            
+
         data_ingestion_dir = os.path.join(self.pipeline_config.artifact_dir,
                                           DATA_INGESTION_DIR,
                                           self.timestamp)
@@ -67,9 +68,8 @@ class FinanceConfig:
             data_ingestion_dir=data_ingestion_dir,
             download_dir=os.path.join(data_ingestion_dir, DATA_INGESTION_DOWNLOADED_DATA_DIR),
             file_name=DATA_INGESTION_FILE_NAME,
-            csv_data_dir=os.path.join(data_ingestion_dir,DATA_INGESTION_CSV_DATA_DIR)
+            data_dir=os.path.join(data_ingestion_dir, DATA_INGESTION_DATA_DIR),
+            failed_dir=os.path.join(data_ingestion_dir, DATA_INGESTION_FAILED_DIR)
         )
         logger.info(f"Data ingestion config: {data_ingestion_config}")
         return data_ingestion_config
-
-

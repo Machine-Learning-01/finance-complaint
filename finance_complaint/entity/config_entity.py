@@ -13,5 +13,6 @@ DataIngestionConfig = namedtuple("DataIngestionConfig", ["from_date",
                                                          "data_ingestion_dir",
                                                          "download_dir",
                                                          "file_name",
-                                                         "csv_data_dir"
+                                                         "data_dir",
+                                                         "failed_dir"
                                                          ])
