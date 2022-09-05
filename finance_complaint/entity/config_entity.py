@@ -1,7 +1,5 @@
 from collections import namedtuple
 
-import enum
-from enum import Enum
 
 
 
@@ -16,3 +14,4 @@ DataIngestionConfig = namedtuple("DataIngestionConfig", ["from_date",
                                                          "failed_dir",
                                                          "metadata_file_path"
                                                          ])
+

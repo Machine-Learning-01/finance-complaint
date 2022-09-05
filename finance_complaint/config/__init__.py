@@ -94,3 +94,6 @@ class FinanceConfig:
         )
         logger.info(f"Data ingestion config: {data_ingestion_config}")
         return data_ingestion_config
+
+    
+    
