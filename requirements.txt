@@ -3,4 +3,5 @@ requests
 jupyterlab
 pyspark==3.2.1
 PyYAML
+ipykernel
 -e .
