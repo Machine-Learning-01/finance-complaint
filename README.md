@@ -34,3 +34,7 @@ start the data ingestion
 accept the new incoming configuration
 start data ingestion 
 update the metainfo
+
+
+--
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch

@@ -1,9 +1,5 @@
 from collections import namedtuple
 
-import enum
-from enum import Enum
 
-
-
-
-DataIngestionArtifact = namedtuple("DataIngestionArtifact", ["data_file_path"])
+DataIngestionArtifact = namedtuple("DataIngestionArtifact", ["feature_store_file_path"])
+DataPreprocessingArtifact = namedtuple("DataPreprocessingArtifact",["preprocessed_data_file_path"])

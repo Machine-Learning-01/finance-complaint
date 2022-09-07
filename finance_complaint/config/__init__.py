@@ -1,5 +1,5 @@
 from time import strftime
-from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig
+from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig, DataPreprocessingConfig
 from finance_complaint.constant import *
 from finance_complaint.logger import logger
 from finance_complaint.exception import FinanceException
@@ -42,8 +42,6 @@ class FinanceConfig:
     def get_data_ingestion_config(self, from_date=DATA_INGESTION_MIN_START_DATE, to_date=None) \
             -> DataIngestionConfig:
 
-        
-
         """
         from date can not be less than min start date
 
@@ -51,10 +49,10 @@ class FinanceConfig:
         
         """
 
-        min_start_date= datetime.strptime(DATA_INGESTION_MIN_START_DATE,"%Y-%m-%d")
-        from_date_obj = datetime.strptime(from_date,"%Y-%m-%d")
-        if from_date_obj< min_start_date:
-            from_date=DATA_INGESTION_MIN_START_DATE
+        min_start_date = datetime.strptime(DATA_INGESTION_MIN_START_DATE, "%Y-%m-%d")
+        from_date_obj = datetime.strptime(from_date, "%Y-%m-%d")
+        if from_date_obj < min_start_date:
+            from_date = DATA_INGESTION_MIN_START_DATE
         if to_date is None:
             to_date = datetime.now().strftime("%Y-%m-%d")
 
@@ -62,24 +60,20 @@ class FinanceConfig:
         master directory for data ingestion
         we will store metadata information and ingested file to avoid redundant download
         """
-        data_ingestion_master_dir =  os.path.join(self.pipeline_config.artifact_dir,
-                                          DATA_INGESTION_DIR)
-        
-        #time based directory for each run
-        data_ingestion_dir =os.path.join(data_ingestion_master_dir,
+        data_ingestion_master_dir = os.path.join(self.pipeline_config.artifact_dir,
+                                                 DATA_INGESTION_DIR)
+
+        # time based directory for each run
+        data_ingestion_dir = os.path.join(data_ingestion_master_dir,
                                           self.timestamp)
 
-
-        metadata_file_path=os.path.join(data_ingestion_master_dir,DATA_INGESTION_METADATA_FILE_NAME)
-
+        metadata_file_path = os.path.join(data_ingestion_master_dir, DATA_INGESTION_METADATA_FILE_NAME)
 
         data_ingestion_metadata = DataIngestionMetadata(metadata_file_path=metadata_file_path)
 
         if data_ingestion_metadata.is_metadata_file_present:
             metadata_info = data_ingestion_metadata.get_metadata_info()
-            from_date=metadata_info.to_date
-
-
+            from_date = metadata_info.to_date
 
         data_ingestion_config = DataIngestionConfig(
             from_date=from_date,
@@ -87,7 +81,7 @@ class FinanceConfig:
             data_ingestion_dir=data_ingestion_dir,
             download_dir=os.path.join(data_ingestion_dir, DATA_INGESTION_DOWNLOADED_DATA_DIR),
             file_name=DATA_INGESTION_FILE_NAME,
-            data_dir=os.path.join(data_ingestion_master_dir, DATA_INGESTION_MASTER_DATA_DIR),
+            feature_store_dir=os.path.join(data_ingestion_master_dir, DATA_INGESTION_FEATURE_STORE_DIR),
             failed_dir=os.path.join(data_ingestion_dir, DATA_INGESTION_FAILED_DIR),
             metadata_file_path=metadata_file_path
 
@@ -95,5 +89,20 @@ class FinanceConfig:
         logger.info(f"Data ingestion config: {data_ingestion_config}")
         return data_ingestion_config
 
-    
-    
+    def get_data_preprocessing_config(self) -> DataPreprocessingConfig:
+        try:
+            data_preprocessing_dir = os.path.join(self.pipeline_config.artifact_dir,
+                                                  DATA_PREPROCESSING_DIR, self.timestamp)
+
+            preprocessed_data_file_path = os.path.join(data_preprocessing_dir, DATA_PREPROCESSED_DATA_FILE_PATH)
+
+            data_preprocessing_config = DataPreprocessingConfig(
+                preprocessed_data_file_path=preprocessed_data_file_path,
+                preprocessing_dir=data_preprocessing_dir
+            )
+
+            logger.info(f"Data preprocessing config: {data_preprocessing_config}")
+
+            return data_preprocessing_config
+        except Exception as e:
+            raise FinanceException(e, sys)

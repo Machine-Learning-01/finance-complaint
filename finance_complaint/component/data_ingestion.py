@@ -204,7 +204,9 @@ class DataIngestion:
                 logger.info(f"Converting and combining downloaded json into csv file")
                 file_path = self.convert_files_to_parquet()
                 self.write_metadata(file_path=file_path)
+            return DataIngestionArtifact(data_file_path=os.path.join(self.data_ingestion_config.data_dir,self.data_ingestion_config.file_name)
             
+            )
         except Exception as e:
             raise FinanceException(e, sys)
 
