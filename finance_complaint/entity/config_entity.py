@@ -1,9 +1,5 @@
 from collections import namedtuple
 
-
-
-
-
 PipelineConfig = namedtuple("PipelineConfig", ["pipeline_name", "artifact_dir"])
 
 DataIngestionConfig = namedtuple("DataIngestionConfig", ["from_date",
@@ -16,4 +12,7 @@ DataIngestionConfig = namedtuple("DataIngestionConfig", ["from_date",
                                                          "metadata_file_path"
                                                          ])
 
-DataPreprocessingConfig = namedtuple('DataPreprocessing',["preprocessed_data_file_path","preprocessing_dir"])
+DataValidationConfig = namedtuple('DataValidationConfig', ["accepted_data_dir", "rejected_data_dir", "file_name"])
+
+DataTransformationConfig = namedtuple('DataTransformationConfig', ['file_name', 'export_pipeline_dir',
+                                                                   'transformed_data_dir', ])

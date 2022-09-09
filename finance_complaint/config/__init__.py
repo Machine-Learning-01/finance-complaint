@@ -1,5 +1,6 @@
 from time import strftime
-from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig, DataPreprocessingConfig
+from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig, DataValidationConfig
+from finance_complaint.entity.config_entity import DataTransformationConfig
 from finance_complaint.constant import *
 from finance_complaint.logger import logger
 from finance_complaint.exception import FinanceException
@@ -89,20 +90,48 @@ class FinanceConfig:
         logger.info(f"Data ingestion config: {data_ingestion_config}")
         return data_ingestion_config
 
-    def get_data_preprocessing_config(self) -> DataPreprocessingConfig:
+    def get_data_validation_config(self) -> DataValidationConfig:
+        """
+
+        """
         try:
-            data_preprocessing_dir = os.path.join(self.pipeline_config.artifact_dir,
-                                                  DATA_PREPROCESSING_DIR, self.timestamp)
+            data_validation_dir = os.path.join(self.pipeline_config.artifact_dir,
+                                               DATA_VALIDATION_DIR, self.timestamp)
 
-            preprocessed_data_file_path = os.path.join(data_preprocessing_dir, DATA_PREPROCESSED_DATA_FILE_PATH)
+            accepted_data_dir = os.path.join(data_validation_dir, DATA_VALIDATION_ACCEPTED_DATA_DIR)
+            rejected_data_dir = os.path.join(data_validation_dir, DATA_VALIDATION_REJECTED_DATA_DIR)
 
-            data_preprocessing_config = DataPreprocessingConfig(
-                preprocessed_data_file_path=preprocessed_data_file_path,
-                preprocessing_dir=data_preprocessing_dir
+            data_preprocessing_config = DataValidationConfig(
+                accepted_data_dir=accepted_data_dir,
+                rejected_data_dir=rejected_data_dir,
+                file_name=DATA_VALIDATION_FILE_NAME
             )
 
             logger.info(f"Data preprocessing config: {data_preprocessing_config}")
 
             return data_preprocessing_config
+        except Exception as e:
+            raise FinanceException(e, sys)
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        try:
+            data_transformation_dir = os.path.join(self.pipeline_config.artifact_dir,
+                                                   DATA_TRANSFORMATION_DIR, self.timestamp)
+
+            transformed_data_dir = os.path.join(
+                data_transformation_dir, DATA_TRANSFORMATION_DATA_DIR
+            )
+
+            export_pipeline_dir = os.path.join(
+                data_transformation_dir, DATA_TRANSFORMATION_PIPELINE_DIR
+            )
+            data_transformation_config = DataTransformationConfig(
+                export_pipeline_dir=export_pipeline_dir,
+                transformed_data_dir=transformed_data_dir,
+                file_name=DATA_TRANSFORMATION_FILE_NAME,
+            )
+
+            logger.info(f"Data transformation config: {data_transformation_config}")
+            return data_transformation_config
         except Exception as e:
             raise FinanceException(e, sys)

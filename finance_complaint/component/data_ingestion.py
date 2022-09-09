@@ -17,17 +17,16 @@ import uuid
 DownloadUrl = namedtuple("DownloadUrl", ["url", "file_path", "n_retry"])
 
 
-
 class DataIngestion:
 
-    def __init__(self, data_ingestion_config: DataIngestionConfig  , n_retry: int = 5, n_month_interval: int = 3):
+    def __init__(self, data_ingestion_config: DataIngestionConfig, n_retry: int = 5, n_month_interval: int = 3):
         """
         data_ingestion_config: Data Ingestion config
         n_retry: Number of retry filed should be tried to download in case of failure encountered
         n_month_interval: n month data will be downloded
         """
         try:
-            logger.info(f"{'>>'*20}Starting data ingestion.{'<<'*20}")
+            logger.info(f"{'>>' * 20}Starting data ingestion.{'<<' * 20}")
             self.data_ingestion_config = data_ingestion_config
             self.failed_download_urls: List[DownloadUrl] = []
             self.n_retry = n_retry
@@ -45,8 +44,8 @@ class DataIngestion:
         try:
             if n_month_interval_url is None:
                 n_month_interval_url = self.n_month_interval
-            
-            #month interval 
+
+            # month interval
             month_interval = list(pd.date_range(start=self.data_ingestion_config.from_date,
                                                 end=self.data_ingestion_config.to_date,
                                                 freq="m").astype('str'))
@@ -70,7 +69,7 @@ class DataIngestion:
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def convert_files_to_parquet(self, data_dir=None, json_data_dir=None, output_file_name=None)->str:
+    def convert_files_to_parquet(self, data_dir=None, json_data_dir=None, output_file_name=None) -> str:
         """
         downloaded files will be converted and merged into single parquet file
         json_data_dir: downloaded json file directory
@@ -84,7 +83,7 @@ class DataIngestion:
                 json_data_dir = self.data_ingestion_config.download_dir
 
             if data_dir is None:
-                data_dir = self.data_ingestion_config.data_dir
+                data_dir = self.data_ingestion_config.feature_store_dir
 
             if output_file_name is None:
                 output_file_name = self.data_ingestion_config.file_name
@@ -96,11 +95,10 @@ class DataIngestion:
             logger.info(f"Parquet file will be created at: {file_path}")
 
             if not os.path.exists(json_data_dir):
-                
                 return file_path
 
             for file_name in os.listdir(json_data_dir):
-                df = spark_session.read.json(os.path.join(json_data_dir,file_name))
+                df = spark_session.read.json(os.path.join(json_data_dir, file_name))
                 df.write.mode('append').parquet(file_path)
 
             return file_path
@@ -147,16 +145,15 @@ class DataIngestion:
             logger.info(f"Starting download operation: {download_url}")
             download_dir = os.path.dirname(download_url.file_path)
 
-            #creating download directory
+            # creating download directory
             os.makedirs(download_dir, exist_ok=True)
 
-
-            #downloading data
+            # downloading data
             data = requests.get(download_url.url, params={'User-agent': f'your bot {uuid.uuid4()}'})
 
             try:
                 logger.info(f"Started writing downlaoded data into json file: {download_url.file_path}")
-                #saving downloaded data into hard disk
+                # saving downloaded data into hard disk
                 with open(download_url.file_path, "w") as file_obj:
                     finance_complaint_data = list(map(lambda x: x["_source"],
                                                       filter(lambda x: "_source" in x.keys(),
@@ -176,7 +173,7 @@ class DataIngestion:
             logger.info(e)
             raise FinanceException(e, sys)
 
-    def write_metadata(self,file_path:str)->None:
+    def write_metadata(self, file_path: str) -> None:
         """
         This function help us to update metadata information 
         so that we can avoid redundant download and merging.
@@ -187,29 +184,36 @@ class DataIngestion:
             metadata_info = DataIngestionMetadata(metadata_file_path=self.data_ingestion_config.metadata_file_path)
 
             metadata_info.write_metadata_info(from_date=self.data_ingestion_config.from_date,
-            to_date=self.data_ingestion_config.to_date,
-            data_file_path=file_path
-            )
+                                              to_date=self.data_ingestion_config.to_date,
+                                              data_file_path=file_path
+                                              )
             logger.info(f"Metadata has been written.")
         except Exception as e:
-            raise FinanceException(e,sys)
+            raise FinanceException(e, sys)
 
-    def initiate_data_ingestion(self)-> DataIngestionArtifact:
+    def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
             logger.info(f"Started downloading json file")
             self.download_monthly_files()
 
             if os.path.exists(self.data_ingestion_config.download_dir):
-
                 logger.info(f"Converting and combining downloaded json into csv file")
                 file_path = self.convert_files_to_parquet()
                 self.write_metadata(file_path=file_path)
-            return DataIngestionArtifact(data_file_path=os.path.join(self.data_ingestion_config.data_dir,self.data_ingestion_config.file_name)
-            
+
+            feature_store_file_path = os.path.join(self.data_ingestion_config.feature_store_dir,
+                                                   self.data_ingestion_config.file_name)
+            artifact = DataIngestionArtifact(
+                feature_store_file_path=feature_store_file_path,
+                download_dir=self.data_ingestion_config.download_dir,
+                metadata_file_path=self.data_ingestion_config.metadata_file_path,
+
             )
+
+            logger.info(f"Data ingestion artifact: {artifact}")
+            return artifact
         except Exception as e:
             raise FinanceException(e, sys)
-
 
 
 def main():

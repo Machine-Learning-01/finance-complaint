@@ -8,7 +8,7 @@ from pyspark.sql import DataFrame
 
 class ComplaintColumn:
 
-    def __init__(self, ):
+    def __init__(self):
         self.col_company_response: str = 'company_response'
         self.col_consumer_consent_provided: str = 'consumer_consent_provided'
         self.col_submitted_via = 'submitted_via'
@@ -34,7 +34,8 @@ class ComplaintColumn:
                 StructField(self.col_consumer_consent_provided, StringType()),
                 StructField(self.col_submitted_via, StringType()),
                 StructField(self.col_timely, StringType()),
-                StructField(self.col_diff_in_days, FloatType()),
+                StructField(self.col_date_sent_to_company, TimestampType()),
+                StructField(self.col_date_received, TimestampType()),
                 StructField(self.col_company, StringType()),
                 StructField(self.col_issue, StringType()),
                 StructField(self.col_product, StringType()),
@@ -62,9 +63,32 @@ class ComplaintColumn:
         return features
 
     @property
-    def numerical_features(self) -> List[str]:
-        features = [self.col_diff_in_days]
+    def im_one_hot_encoding_features(self) -> List[str]:
+        return [f"im_{col}" for col in self.one_hot_encoding_features]
+
+    @property
+    def string_indexer_one_hot_features(self) -> List[str]:
+        return [f"si_{col}" for col in self.one_hot_encoding_features]
+
+    @property
+    def derived_input_features(self) -> List[str]:
+        features = [
+            self.col_date_sent_to_company,
+            self.col_date_received
+        ]
         return features
+
+    @property
+    def derived_output_features(self) -> List[str]:
+        return [self.col_diff_in_days]
+
+    @property
+    def numerical_columns(self) -> List[str]:
+        return self.derived_output_features
+
+    @property
+    def im_numerical_columns(self) -> List[str]:
+        return [f"im_{col}" for col in self.numerical_columns]
 
     @property
     def frequency_encoding_features(self) -> List[str]:
@@ -77,15 +101,48 @@ class ComplaintColumn:
         return features
 
     @property
+    def im_frequency_encoding_features(self) -> List[str]:
+        return [f"im_{col}" for col in self.frequency_encoding_features]
+
+    @property
+    def categorical_columns(self) -> List[str]:
+        return self.one_hot_encoding_features + self.frequency_encoding_features
+
+    @property
+    def im_categorical_columns(self) -> List[str]:
+        return self.im_one_hot_encoding_features + self.im_frequency_encoding_features
+
+    @property
+    def tf_one_hot_encoding_features(self) -> List[str]:
+        return [f"tf_{col}" for col in self.one_hot_encoding_features]
+
+    @property
+    def tf_frequency_encoding_features(self) -> List[str]:
+        return [f"tf_{col}" for col in self.frequency_encoding_features]
+
+    @property
+    def input_features(self) -> List[str]:
+        in_features = self.tf_one_hot_encoding_features + self.tf_frequency_encoding_features + self.im_numerical_columns
+        return in_features
+
+    @property
     def required_columns(self) -> List[str]:
-        features = [self.target_column] + self.one_hot_encoding_features + self.frequency_encoding_features \
-                   + self.numerical_features
+        features = [self.target_column] + self.one_hot_encoding_features + self.frequency_encoding_features + \
+                   [self.col_date_sent_to_company, self.col_date_received]
         return features
 
     @property
     def unwanted_columns(self) -> List[str]:
         features = [
-            self.col_date_sent_to_company, self.col_date_received, self.col_complaint_id,
+            self.col_complaint_id,
             self.col_sub_product, self.col_complaint_what_happened]
 
         return features
+
+    @property
+    def vector_assembler_output(self) -> str:
+        return "va_input_features"
+
+    @property
+    def scaled_vector_input_features(self) -> str:
+        return "scaled_input_features"

@@ -1,0 +1,8 @@
+
+DATA_TRANSFORMATION_DIR = "data_transformation"
+DATA_TRANSFORMATION_PIPELINE_DIR = "pipeline"
+DATA_TRANSFORMATION_DATA_DIR = "transformed_data"
+DATA_TRANSFORMATION_FILE_NAME = "finance_complaint"
+
+
+
