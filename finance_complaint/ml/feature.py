@@ -12,26 +12,32 @@ from pyspark.sql.functions import desc
 from pyspark.sql.functions import col, abs, when, regexp_replace
 from typing import List
 from pyspark.sql.types import TimestampType, LongType, FloatType, IntegerType
-
+from finance_complaint.logger import logger
 from typing import Dict
+from finance_complaint.entity.spark_manager import spark_session
 
 
 class FrequencyEncoder(Estimator, HasInputCols, HasOutputCols,
                        DefaultParamsReadable, DefaultParamsWritable):
+    frequencyInfo = Param(Params._dummy(), "getfrequencyInfo", "getfrequencyInfo",
+                          typeConverter=TypeConverters.toList)
 
     @keyword_only
     def __init__(self, inputCols: List[str] = None, outputCols: List[str] = None, ):
         super(FrequencyEncoder, self).__init__()
         kwargs = self._input_kwargs
+
+        self.frequencyInfo = Param(self, "frequencyInfo", "")
+        self._setDefault(frequencyInfo="")
         # self._set(**kwargs)
-        self.replace_info: Dict[str, Dict[str, str]] = dict()
+
         self.setParams(**kwargs)
 
-    def setReplaceInfo(self, replace_info: Dict[str, Dict[str, str]]):
-        self.replace_info = replace_info
+    def setfrequencyInfo(self, frequencyInfo: list):
+        return self._set(frequencyInfo=frequencyInfo)
 
-    def getReplaceInfo(self):
-        return self.replace_info
+    def getfrequencyInfo(self):
+        return self.getOrDefault(self.frequencyInfo)
 
     @keyword_only
     def setParams(self, inputCols: List[str] = None, outputCols: List[str] = None, ):
@@ -52,23 +58,24 @@ class FrequencyEncoder(Estimator, HasInputCols, HasOutputCols,
 
     def _fit(self, dataframe: DataFrame):
         input_columns = self.getInputCols()
+        print(f"Input columns: {input_columns}")
         output_columns = self.getOutputCols()
+        print(f"Output columns: {output_columns}")
+        replace_info = []
         for column, new_column in zip(input_columns, output_columns):
-            frequency_of_each_category = dataframe.groupBy(column).count()
-            # frequency_of_each_category.show()
-            replacement_dict = dict()
+            freq = (dataframe.
+                    select(col(column).
+                           alias(f'g_{column}')).
+                    groupby(f'g_{column}').
+                    count().
+                    withColumn(new_column, col('count')))
+            freq = freq.drop('count')
+            logger.info(f"{column} has [{freq.count()}] unique category")
+            replace_info.append(freq.collect())
 
-            for each_category in frequency_of_each_category.collect():
-                # print(each_category)
-                current_value = each_category[column]
-                new_value = each_category['count']
-                replacement_dict[current_value] = str(new_value)
-
-            self.replace_info[new_column] = replacement_dict
-
-        self.setReplaceInfo(replace_info=self.replace_info)
+        self.setfrequencyInfo(frequencyInfo=replace_info)
         estimator = FrequencyEncoderModel(inputCols=input_columns, outputCols=output_columns)
-        estimator.setReplaceInfo(replace_info=self.replace_info)
+        estimator.setfrequencyInfo(frequencyInfo=replace_info)
         return estimator
 
 
@@ -80,18 +87,22 @@ class FrequencyEncoderModel(FrequencyEncoder, Transformer):
     def _transform(self, dataframe: DataFrame):
         inputCols = self.getInputCols()
         outputCols = self.getOutputCols()
-        for in_col, out_col in zip(inputCols, outputCols):
-            replacement_values = self.replace_info[out_col]
-            # dataframe = dataframe.withColumn(out_col,col(in_col))
 
-            for current_val, new_val in replacement_values.items():
-                dataframe = dataframe.withColumn(out_col, when(col(in_col).like(current_val),
-                                                               regexp_replace(in_col,
-                                                                              current_val,
-                                                                              str(new_val)
-                                                                              )
-                                                               ))
-            dataframe = dataframe.withColumn(out_col, col(out_col).cast(LongType()))
+        print(f"Input columns: {inputCols}")
+
+        print(f"Output columns: {outputCols}")
+        freqInfo = self.getfrequencyInfo()
+        for in_col, out_col, freq_info in zip(inputCols, outputCols, freqInfo):
+            frequency_dataframe: DataFrame = spark_session.createDataFrame(freq_info)
+
+            columns = frequency_dataframe.columns
+            dataframe = dataframe.join(frequency_dataframe,
+                                       on=dataframe[in_col] == frequency_dataframe[columns[0]])
+
+            dataframe = dataframe.drop(columns[0])
+            if out_col not in dataframe.columns:
+                dataframe = dataframe.withColumn(out_col, col(columns[1]))
+                dataframe = dataframe.drop(columns[1])
         return dataframe
 
 
@@ -209,8 +220,8 @@ class FrequencyImputerModel(FrequencyImputer, Transformer):
         inputCols = self.getInputCols()
         for outputColumn, inputColumn in zip(outputCols, inputCols):
             dataset = dataset.withColumn(outputColumn, col(inputColumn))
-            print(dataset.columns)
-            print(outputColumn, inputColumn)
+            # print(dataset.columns)
+            # print(outputColumn, inputColumn)
 
         dataset = dataset.na.fill(updateMissingValue)
 
