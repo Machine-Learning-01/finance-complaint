@@ -4,6 +4,7 @@ from finance_complaint.exception import FinanceException
 import os, sys
 
 from pyspark.sql import DataFrame
+from typing import Dict
 
 
 class ComplaintColumn:
@@ -146,3 +147,10 @@ class ComplaintColumn:
     @property
     def scaled_vector_input_features(self) -> str:
         return "scaled_input_features"
+
+    @property
+    def target_value_mapping(self) -> Dict[str, str]:
+        return {
+            "Yes": "1",
+            "No": "0",
+        }

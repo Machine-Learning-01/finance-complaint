@@ -3,7 +3,7 @@ from typing import List
 
 # Declaring variables for setup functions
 PROJECT_NAME = "finance-complaint"
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 AUTHOR = "Avnish Yadav"
 DESRCIPTION = "This is a sample for industry ready solution"
 
