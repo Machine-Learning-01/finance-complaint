@@ -26,6 +26,7 @@ class ComplaintColumn:
         self.col_complaint_id: str = "complaint_id"
         self.col_sub_product: str = "sub_product"
         self.col_complaint_what_happened: str = "complaint_what_happened"
+        self.col_company_public_response:str = "company_public_response"
 
     @property
     def dataframe_schema(self) -> StructType:
@@ -56,11 +57,20 @@ class ComplaintColumn:
 
     @property
     def one_hot_encoding_features(self) -> List[str]:
-        features = [self.col_company_response,
+        features = [
+                    self.col_company_response,
                     self.col_consumer_consent_provided,
                     self.col_submitted_via,
-                    self.col_timely
+                    # self.col_timely
                     ]
+        return features
+
+    @property
+    def tfidf_features(self)->List[str]:
+        features = [
+            #self.col_company_public_response,
+            self.col_issue
+        ]
         return features
 
     @property
@@ -92,44 +102,34 @@ class ComplaintColumn:
         return [f"im_{col}" for col in self.numerical_columns]
 
     @property
-    def frequency_encoding_features(self) -> List[str]:
-        features = [self.col_company,
-                    self.col_issue,
-                    self.col_product,
-                    self.col_state,
-                    self.col_zip_code
-                    ]
-        return features
-
-    @property
-    def im_frequency_encoding_features(self) -> List[str]:
-        return [f"im_{col}" for col in self.frequency_encoding_features]
-
-    @property
     def categorical_columns(self) -> List[str]:
-        return self.one_hot_encoding_features + self.frequency_encoding_features
+        return self.one_hot_encoding_features
 
     @property
     def im_categorical_columns(self) -> List[str]:
-        return self.im_one_hot_encoding_features + self.im_frequency_encoding_features
+        return self.im_one_hot_encoding_features 
 
     @property
     def tf_one_hot_encoding_features(self) -> List[str]:
         return [f"tf_{col}" for col in self.one_hot_encoding_features]
+    
+    @property
+    def tfidf_feature(self)->List[str]:
+        return [self.col_issue]
 
     @property
-    def tf_frequency_encoding_features(self) -> List[str]:
-        return [f"tf_{col}" for col in self.frequency_encoding_features]
+    def tf_tfidf_features(self)->List[str]:
+        return [f"tf_{col}" for col in self.tfidf_feature]
 
     @property
     def input_features(self) -> List[str]:
-        in_features = self.tf_one_hot_encoding_features + self.tf_frequency_encoding_features + self.im_numerical_columns
+        in_features = self.tf_one_hot_encoding_features + self.im_numerical_columns +self.tf_tfidf_features
         return in_features
 
     @property
     def required_columns(self) -> List[str]:
-        features = [self.target_column] + self.one_hot_encoding_features + self.frequency_encoding_features + \
-                   [self.col_date_sent_to_company, self.col_date_received]
+        features = [self.target_column] + self.one_hot_encoding_features + self.tfidf_features +\
+                   [self.col_date_sent_to_company, self.col_date_received] 
         return features
 
     @property
@@ -153,4 +153,5 @@ class ComplaintColumn:
         return {
             "Yes": "1",
             "No": "0",
+            "N/A":"2",
         }

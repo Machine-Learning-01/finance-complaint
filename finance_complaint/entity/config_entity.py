@@ -15,9 +15,8 @@ DataIngestionConfig = namedtuple("DataIngestionConfig", ["from_date",
 DataValidationConfig = namedtuple('DataValidationConfig', ["accepted_data_dir", "rejected_data_dir", "file_name"])
 
 DataTransformationConfig = namedtuple('DataTransformationConfig', ['file_name', 'export_pipeline_dir',
-                                                                   'transformed_data_dir', ])
+                                                                   'transformed_train_dir',"transformed_test_dir",
+                                                                   "expected_accuracy" ])
 
-ModelTrainerConfig = namedtuple('ModelTrainerConfig', ["export_model_path", "cache_dir",
-                                                       "batch_size", "split_ratio", "epoch"])
 
 

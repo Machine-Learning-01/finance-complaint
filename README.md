@@ -34,7 +34,8 @@ start the data ingestion
 accept the new incoming configuration
 start data ingestion 
 update the metainfo
-
+```
 pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 -f https://download.pytorch.org/whl/torch_stable.html
+```
 --
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch

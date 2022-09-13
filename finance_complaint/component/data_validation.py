@@ -129,41 +129,41 @@ class DataValidation(ComplaintColumn):
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def drop_row_without_target_label(self, dataframe: DataFrame) -> DataFrame:
-        try:
-            dropped_rows = "dropped_row"
-            total_rows: int = dataframe.count()
-            logger.info(f"Number of row: {total_rows} ")
-
-            # Drop row if target value is unknown
-            logger.info(f"Dropping rows without target value.")
-            unlabelled_dataframe: DataFrame = dataframe.filter(f"{self.target_column}== 'N/A'")
-
-            rejected_dir = os.path.join(self.data_validation_config.rejected_data_dir, dropped_rows)
-            os.makedirs(rejected_dir, exist_ok=True)
-            file_path = os.path.join(rejected_dir, self.data_validation_config.file_name)
-
-            unlabelled_dataframe = unlabelled_dataframe.withColumn(ERROR_MESSAGE, lit("Dropped row as target label is "
-                                                                                      "unknown"))
-
-            logger.info(f"Unlabelled data has row: [{unlabelled_dataframe.count()}] and columns:"
-                        f" [{len(unlabelled_dataframe.columns)}]")
-
-            logger.info(f"Write unlabelled data into rejected file path: [{file_path}]")
-            unlabelled_dataframe.write.mode("append").parquet(file_path)
-
-            dataframe: DataFrame = dataframe.filter(f"{self.target_column}!= 'N/A'")
-
-            logger.info(f"Remaining data has rows: [{dataframe.count()}] and columns: [{len(dataframe.columns)}]")
-            return dataframe
-        except Exception as e:
-            raise FinanceException(e, sys)
+    # def drop_row_without_target_label(self, dataframe: DataFrame) -> DataFrame:
+    #     try:
+    #         dropped_rows = "dropped_row"
+    #         total_rows: int = dataframe.count()
+    #         logger.info(f"Number of row: {total_rows} ")
+    #
+    #         # Drop row if target value is unknown
+    #         logger.info(f"Dropping rows without target value.")
+    #         unlabelled_dataframe: DataFrame = dataframe.filter(f"{self.target_column}== 'N/A'")
+    #
+    #         rejected_dir = os.path.join(self.data_validation_config.rejected_data_dir, dropped_rows)
+    #         os.makedirs(rejected_dir, exist_ok=True)
+    #         file_path = os.path.join(rejected_dir, self.data_validation_config.file_name)
+    #
+    #         unlabelled_dataframe = unlabelled_dataframe.withColumn(ERROR_MESSAGE, lit("Dropped row as target label is "
+    #                                                                                   "unknown"))
+    #
+    #         logger.info(f"Unlabelled data has row: [{unlabelled_dataframe.count()}] and columns:"
+    #                     f" [{len(unlabelled_dataframe.columns)}]")
+    #
+    #         logger.info(f"Write unlabelled data into rejected file path: [{file_path}]")
+    #         unlabelled_dataframe.write.mode("append").parquet(file_path)
+    #
+    #         dataframe: DataFrame = dataframe.filter(f"{self.target_column}!= 'N/A'")
+    #
+    #         logger.info(f"Remaining data has rows: [{dataframe.count()}] and columns: [{len(dataframe.columns)}]")
+    #         return dataframe
+    #     except Exception as e:
+    #         raise FinanceException(e, sys)
 
     def initiate_data_validation(self) -> DataValidationArtifact:
         try:
             logger.info(f"Initiating data preprocessing.")
             dataframe: DataFrame = self.read_data()
-            dataframe = self.drop_row_without_target_label(dataframe=dataframe)
+            # dataframe = self.drop_row_without_target_label(dataframe=dataframe)
 
             logger.info(f"Dropping unwanted columns")
             dataframe: DataFrame = self.drop_unwanted_columns(dataframe=dataframe)

@@ -4,10 +4,9 @@ from finance_complaint.config import FinanceConfig
 from finance_complaint.component.data_ingestion import DataIngestion
 from finance_complaint.component.data_validation import DataValidation
 from finance_complaint.component.data_transformation import DataTransformation
-from finance_complaint.component.model_trainer import ModelTrainer
 from finance_complaint.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, \
     DataTransformationArtifact, ModelTrainerArtifact
-
+import pickle
 import sys
 
 
@@ -49,18 +48,6 @@ class Pipeline():
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
-        try:
-            model_trainer_config = self.finance_config.get_model_trainer_config()
-            model_trainer = ModelTrainer(data_transformation_artifact=data_transformation_artifact,
-                                         model_trainer_config=model_trainer_config
-                                         )
-
-            model_trainer_artifact = model_trainer.initiate_model_training()
-            logger.info(f"Model trainer artifact: [{model_trainer_artifact}]")
-            return model_trainer_artifact
-        except Exception as e:
-            raise FinanceException(e, sys)
 
     def start(self):
         try:
@@ -68,7 +55,7 @@ class Pipeline():
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact = self.start_data_transformation(
                 data_validation_artifact=data_validation_artifact)
-            model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
 
         except Exception as e:
+            
             raise FinanceException(e, sys)

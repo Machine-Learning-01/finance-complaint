@@ -120,8 +120,11 @@ class FinanceConfig:
             data_transformation_dir = os.path.join(self.pipeline_config.artifact_dir,
                                                    DATA_TRANSFORMATION_DIR, self.timestamp)
 
-            transformed_data_dir = os.path.join(
-                data_transformation_dir, DATA_TRANSFORMATION_DATA_DIR
+            transformed_train_data_dir = os.path.join(
+                data_transformation_dir, DATA_TRANSFORMATION_TRAIN_DIR
+            )
+            transformed_test_data_dir = os.path.join(
+                data_transformation_dir, DATA_TRANSFORMATION_TEST_DIR
             )
 
             export_pipeline_dir = os.path.join(
@@ -129,8 +132,10 @@ class FinanceConfig:
             )
             data_transformation_config = DataTransformationConfig(
                 export_pipeline_dir=export_pipeline_dir,
-                transformed_data_dir=transformed_data_dir,
+                transformed_test_dir=transformed_test_data_dir,
+                transformed_train_dir=transformed_train_data_dir,
                 file_name=DATA_TRANSFORMATION_FILE_NAME,
+                expected_accuracy=DATA_TRANSFORMATION_EXPECTED_ACCURACY
             )
 
             logger.info(f"Data transformation config: {data_transformation_config}")
@@ -138,28 +143,6 @@ class FinanceConfig:
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def get_model_trainer_config(self) -> ModelTrainerConfig:
-
-        model_trainer_dir = os.path.join(
-            self.pipeline_config.artifact_dir,
-            MODEL_TRAINER_DIR,
-            self.timestamp
-        )
-
-        model_path = os.path.join(model_trainer_dir,
-                                  MODEL_TRAINER_TRAINED_MODEL_DIR,
-                                  MODEL_TRAINER_MODEL_NAME)
-
-        cache_dir = os.path.join(model_trainer_dir, MODEL_TRAINER_PARENT_CACHE_DIR_URL_CONF)
-        model_trainer_config = ModelTrainerConfig(export_model_path=model_path,
-                                                  cache_dir=f"file://{cache_dir}",
-                                                  batch_size=MODEL_TRAINER_BATCH_SIZE,
-                                                  split_ratio=MODEL_TRAINER_DATASET_SPLIT_RATIO,
-                                                  epoch=MODEL_TRAINER_EPOCH
-
-                                                  )
-        logger.info(f"Model trainer config: {model_trainer_config}", )
-        return model_trainer_config
 
     def get_model_evaluation_config(self) -> None:
         ...
