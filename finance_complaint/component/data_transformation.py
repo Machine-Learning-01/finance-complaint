@@ -16,6 +16,9 @@ from finance_complaint.ml.feature import FrequencyEncoder, FrequencyImputer, Der
 from pyspark.ml.feature import IDF, Tokenizer, HashingTF, IndexToString
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
+from pyspark.sql.functions import col, rand
+
+PREDICTION_COLUMN_NAME = "prediction"
 
 
 class DataTransformation(ComplaintColumn):
@@ -39,7 +42,7 @@ class DataTransformation(ComplaintColumn):
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def get_data_transformation_pipeline(self) -> Pipeline:
+    def get_data_transformation_pipeline(self, label_generator: IndexToString) -> Pipeline:
         try:
 
             stages = [
@@ -52,21 +55,17 @@ class DataTransformation(ComplaintColumn):
             derived_feature = DerivedFeatureGenerator(inputCols=self.derived_input_features,
                                                       outputCols=self.derived_output_features)
             stages.append(derived_feature)
-
             # creating imputer to fill null values
             imputer = Imputer(inputCols=self.numerical_columns,
                               outputCols=self.im_numerical_columns)
-
             stages.append(imputer)
 
             frequency_imputer = FrequencyImputer(inputCols=self.one_hot_encoding_features,
-                                                 outputCols=self.im_categorical_columns)
+                                                 outputCols=self.im_one_hot_encoding_features)
             stages.append(frequency_imputer)
-
             for im_one_hot_feature, string_indexer_col in zip(self.im_one_hot_encoding_features,
                                                               self.string_indexer_one_hot_features):
                 string_indexer = StringIndexer(inputCol=im_one_hot_feature, outputCol=string_indexer_col)
-
                 stages.append(string_indexer)
 
             one_hot_encoder = OneHotEncoder(inputCols=self.string_indexer_one_hot_features,
@@ -77,10 +76,9 @@ class DataTransformation(ComplaintColumn):
             tokenizer = Tokenizer(inputCol=self.tfidf_features[0], outputCol="words")
             stages.append(tokenizer)
 
-            hashingTF = HashingTF(inputCol="words", outputCol="rawFeatures", numFeatures=40)
-
-            stages.append(hashingTF)
-            idf = IDF(inputCol="rawFeatures", outputCol=self.tf_tfidf_features[0])
+            hashing_tf = HashingTF(inputCol=tokenizer.getOutputCol(), outputCol="rawFeatures", numFeatures=40)
+            stages.append(hashing_tf)
+            idf = IDF(inputCol=hashing_tf.getOutputCol(), outputCol=self.tf_tfidf_features[0])
             stages.append(idf)
 
             vector_assembler = VectorAssembler(inputCols=self.input_features,
@@ -93,9 +91,10 @@ class DataTransformation(ComplaintColumn):
 
             stages.append(standard_scaler)
 
-            rf = RandomForestClassifier(labelCol="indexedLabel", featuresCol=self.scaled_vector_input_features)
-            stages.append(rf)
-
+            random_forest_clf = RandomForestClassifier(labelCol=self.target_indexed_label,
+                                                       featuresCol=self.scaled_vector_input_features)
+            stages.append(random_forest_clf)
+            stages.append(label_generator)
             pipeline = Pipeline(
                 stages=stages
             )
@@ -107,54 +106,111 @@ class DataTransformation(ComplaintColumn):
         except Exception as e:
             raise FinanceException(e, sys)
 
+
+    def get_balanced_shuffled_dataframe(self,dataframe: DataFrame) -> DataFrame:
+        try:
+
+            count_of_each_cat = dataframe.groupby(self.target_column).count().collect()
+            label = []
+            n_record = []
+            for info in count_of_each_cat:
+                n_record.append(info['count'])
+                label.append(info[self.target_column])
+
+            minority_row = min(n_record)
+            n_per = [minority_row / record for record in n_record]
+
+            selected_row = []
+            for label, per in zip(label, n_per):
+                print(label, per)
+                temp_df, _ = dataframe.filter(col(self.target_column) == label).randomSplit([per, 1 - per])
+                selected_row.append(temp_df)
+
+            selected_df: DataFrame = None
+            for df in selected_row:
+                df.groupby(self.target_column).count().show()
+                if selected_df is None:
+                    selected_df = df
+                else:
+                    selected_df = selected_df.union(df)
+
+            selected_df = selected_df.orderBy(rand())
+
+            selected_df.groupby(self.target_column).count().show()
+            return selected_df
+        except Exception as e:
+            raise FinanceException(e, sys)
+
     def initiate_data_transformation(self) -> DataTransformationArtifact:
         try:
+            logger.info(f">>>>>>>>>>>Started data transformation <<<<<<<<<<<<<<<")
             dataframe: DataFrame = self.read_data()
+            dataframe = self.get_balanced_shuffled_dataframe(dataframe=dataframe)
+            logger.info(f"Number of row: [{dataframe.count()}] and column: [{len(dataframe.columns)}]")
 
-            train_dataframe, test_dataframe = dataframe.randomSplit([0.7, 0.3])
-            pipeline = self.get_data_transformation_pipeline()
+            test_size = self.data_tf_config.test_size
+            logger.info(f"Splitting dataset into train and test set using ration: {1 - test_size}:{test_size}")
+            train_dataframe, test_dataframe = dataframe.randomSplit([1 - test_size, test_size])
+            logger.info(f"Train dataset has number of row: [{train_dataframe.count()}] and"
+                        f" column: [{len(train_dataframe.columns)}]")
 
-            labelIndexer = StringIndexer(inputCol=self.target_column, outputCol="indexedLabel")
+            logger.info(f"Train dataset has number of row: [{train_dataframe.count()}] and"
+                        f" column: [{len(train_dataframe.columns)}]")
 
-            labelIndexerModel = labelIndexer.fit(train_dataframe)
-            train_dataframe = labelIndexerModel.transform(train_dataframe)
-            test_dataframe = labelIndexerModel.transform(test_dataframe)
+            # Converting target column to index
+            label_indexer = StringIndexer(inputCol=self.target_column,
+                                          outputCol=self.target_indexed_label)
+            label_indexer_model = label_indexer.fit(train_dataframe)
+
+            # Get category from index
+            label_generator = IndexToString(inputCol=PREDICTION_COLUMN_NAME,
+                                            outputCol=f"{PREDICTION_COLUMN_NAME}_{self.target_column}",
+                                            labels=label_indexer_model.labels)
+
+            pipeline = self.get_data_transformation_pipeline(label_generator=label_generator)
+
+            # Converting target column to integer value
+            train_dataframe = label_indexer_model.transform(train_dataframe)
+            test_dataframe = label_indexer_model.transform(test_dataframe)
 
             trained_pipeline = pipeline.fit(train_dataframe)
             transformed_trained_dataframe = trained_pipeline.transform(train_dataframe)
 
-            labelConverter = IndexToString(inputCol="prediction", outputCol="predictedLabel",
-                                           labels=labelIndexerModel.labels)
+            transformed_trained_dataframe.select(
+                [label_generator.getOutputCol(), self.target_column, ]).show(5)
 
-            transformed_trained_dataframe = labelConverter.transform(transformed_trained_dataframe)
-
-            transformed_trained_dataframe.select("predictedLabel", self.target_column,
-                                                 self.scaled_vector_input_features).show(
-                5)
-
-            # Select (prediction, true label) and compute test error
             evaluator = MulticlassClassificationEvaluator(
-                labelCol="indexedLabel", predictionCol="prediction", metricName="accuracy")
-            accuracy = evaluator.evaluate(transformed_trained_dataframe)
-            print("Training Error = %g" % (1.0 - accuracy))
-            print("Training Accuracy = %g" % (accuracy))
+                labelCol=self.target_indexed_label,
+                predictionCol=PREDICTION_COLUMN_NAME,
+                metricName="accuracy")
+
+            train_accuracy = evaluator.evaluate(transformed_trained_dataframe)
+            train_error = 1.0 - train_accuracy
+            info = f"Training Error = {train_error}"
+            print(info)
+            logger.info(info)
+            info = f"Training Accuracy ={train_accuracy}"
+            logger.info(info)
+            print(info)
 
             transformed_test_dataframe = trained_pipeline.transform(test_dataframe)
-            transformed_test_dataframe = labelConverter.transform(transformed_test_dataframe)
+            transformed_test_dataframe.select(
+                [label_generator.getOutputCol(), self.target_column, ]).show(5)
 
             required_column = self.required_columns
-            required_column.append("predictedLabel")
-
-            # transformed_dataframe.write.parquet("predicted")
-            transformed_test_dataframe.select("predictedLabel", self.target_column,
-                                              ).show(5)
+            required_column.append(label_generator.getOutputCol())
 
             evaluator = MulticlassClassificationEvaluator(
-                labelCol="indexedLabel", predictionCol="prediction", metricName="accuracy")
-            accuracy = evaluator.evaluate(transformed_test_dataframe)
-            print("Test Error = %g" % (1.0 - accuracy))
-            print("Test Accuracy = %g" % (accuracy))
-
+                labelCol=self.target_indexed_label, predictionCol=PREDICTION_COLUMN_NAME, metricName="accuracy")
+            test_accuracy = evaluator.evaluate(transformed_test_dataframe)
+            test_error = 1 - test_accuracy
+            info = f"Testing Error = {test_error}"
+            print(info)
+            logger.info(info)
+            info = f"Testing Accuracy = {test_accuracy}"
+            logger.info(info)
+            print(info)
+            transformed_trained_dataframe = transformed_trained_dataframe.select(required_column)
             transformed_test_dataframe: DataFrame = transformed_test_dataframe.select(required_column
                                                                                       )
             export_pipeline_file_path = self.data_tf_config.export_pipeline_dir
@@ -182,11 +238,10 @@ class DataTransformation(ComplaintColumn):
                 transformed_train_file_path=transformed_test_data_file_path,
                 transformed_test_file_path=transformed_test_data_file_path,
                 exported_pipeline_file_path=export_pipeline_file_path,
-                train_err=None,
-                test_err=None,
-                train_acc=None,
-                test_acc=None
-
+                train_err=train_error,
+                test_err=test_error,
+                train_acc=train_accuracy,
+                test_acc=test_accuracy
             )
 
             logger.info(f"Data transformation artifact: [{data_tf_artifact}]")

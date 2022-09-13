@@ -1,6 +1,5 @@
 from time import strftime
-from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig, DataValidationConfig, \
-    ModelTrainerConfig
+from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig, DataValidationConfig
 from finance_complaint.entity.config_entity import DataTransformationConfig
 from finance_complaint.constant import *
 
@@ -135,7 +134,8 @@ class FinanceConfig:
                 transformed_test_dir=transformed_test_data_dir,
                 transformed_train_dir=transformed_train_data_dir,
                 file_name=DATA_TRANSFORMATION_FILE_NAME,
-                expected_accuracy=DATA_TRANSFORMATION_EXPECTED_ACCURACY
+                expected_accuracy=DATA_TRANSFORMATION_EXPECTED_ACCURACY,
+                test_size=DATA_TRANSFORMATION_TEST_SIZE,
             )
 
             logger.info(f"Data transformation config: {data_transformation_config}")

@@ -26,7 +26,7 @@ class ComplaintColumn:
         self.col_complaint_id: str = "complaint_id"
         self.col_sub_product: str = "sub_product"
         self.col_complaint_what_happened: str = "complaint_what_happened"
-        self.col_company_public_response:str = "company_public_response"
+        self.col_company_public_response: str = "company_public_response"
 
     @property
     def dataframe_schema(self) -> StructType:
@@ -58,20 +58,12 @@ class ComplaintColumn:
     @property
     def one_hot_encoding_features(self) -> List[str]:
         features = [
-                    self.col_company_response,
-                    self.col_consumer_consent_provided,
-                    self.col_submitted_via,
-                    # self.col_timely
-                    ]
-        return features
-
-    @property
-    def tfidf_features(self)->List[str]:
-        features = [
-            #self.col_company_public_response,
-            self.col_issue
+            self.col_company_response,
+            self.col_consumer_consent_provided,
+            self.col_submitted_via,
         ]
         return features
+
 
     @property
     def im_one_hot_encoding_features(self) -> List[str]:
@@ -80,6 +72,19 @@ class ComplaintColumn:
     @property
     def string_indexer_one_hot_features(self) -> List[str]:
         return [f"si_{col}" for col in self.one_hot_encoding_features]
+
+
+    @property
+    def tf_one_hot_encoding_features(self) -> List[str]:
+        return [f"tf_{col}" for col in self.one_hot_encoding_features]
+
+
+    @property
+    def tfidf_features(self) -> List[str]:
+        features = [
+            self.col_issue
+        ]
+        return features
 
     @property
     def derived_input_features(self) -> List[str]:
@@ -102,34 +107,22 @@ class ComplaintColumn:
         return [f"im_{col}" for col in self.numerical_columns]
 
     @property
-    def categorical_columns(self) -> List[str]:
-        return self.one_hot_encoding_features
-
-    @property
-    def im_categorical_columns(self) -> List[str]:
-        return self.im_one_hot_encoding_features 
-
-    @property
-    def tf_one_hot_encoding_features(self) -> List[str]:
-        return [f"tf_{col}" for col in self.one_hot_encoding_features]
-    
-    @property
-    def tfidf_feature(self)->List[str]:
+    def tfidf_feature(self) -> List[str]:
         return [self.col_issue]
 
     @property
-    def tf_tfidf_features(self)->List[str]:
+    def tf_tfidf_features(self) -> List[str]:
         return [f"tf_{col}" for col in self.tfidf_feature]
 
     @property
     def input_features(self) -> List[str]:
-        in_features = self.tf_one_hot_encoding_features + self.im_numerical_columns +self.tf_tfidf_features
+        in_features = self.tf_one_hot_encoding_features + self.im_numerical_columns + self.tf_tfidf_features
         return in_features
 
     @property
     def required_columns(self) -> List[str]:
-        features = [self.target_column] + self.one_hot_encoding_features + self.tfidf_features +\
-                   [self.col_date_sent_to_company, self.col_date_received] 
+        features = [self.target_column] + self.one_hot_encoding_features + self.tfidf_features + \
+                   [self.col_date_sent_to_company, self.col_date_received]
         return features
 
     @property
@@ -148,10 +141,7 @@ class ComplaintColumn:
     def scaled_vector_input_features(self) -> str:
         return "scaled_input_features"
 
+
     @property
-    def target_value_mapping(self) -> Dict[str, str]:
-        return {
-            "Yes": "1",
-            "No": "0",
-            "N/A":"2",
-        }
+    def target_indexed_label(self)->str:
+        return f"indexed_{self.target_column}"

@@ -5,12 +5,12 @@ from finance_complaint.component.data_ingestion import DataIngestion
 from finance_complaint.component.data_validation import DataValidation
 from finance_complaint.component.data_transformation import DataTransformation
 from finance_complaint.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, \
-    DataTransformationArtifact, ModelTrainerArtifact
+    DataTransformationArtifact
 import pickle
 import sys
 
 
-class Pipeline():
+class Pipeline:
 
     def __init__(self, finance_config: FinanceConfig):
         self.finance_config: FinanceConfig = finance_config

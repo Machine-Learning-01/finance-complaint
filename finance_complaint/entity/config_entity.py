@@ -16,7 +16,9 @@ DataValidationConfig = namedtuple('DataValidationConfig', ["accepted_data_dir", 
 
 DataTransformationConfig = namedtuple('DataTransformationConfig', ['file_name', 'export_pipeline_dir',
                                                                    'transformed_train_dir',"transformed_test_dir",
-                                                                   "expected_accuracy" ])
+                                                                   "expected_accuracy",
+                                                                   "test_size"
+                                                                   ])
 
 
 
