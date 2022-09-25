@@ -145,3 +145,7 @@ class ComplaintColumn:
     @property
     def target_indexed_label(self)->str:
         return f"indexed_{self.target_column}"
+
+    @property
+    def prediction_column_name(self)->str:
+        return "prediction"

@@ -1,8 +1,9 @@
 from time import strftime
-from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig, DataValidationConfig
+from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig, DataValidationConfig, \
+    ModelTrainerConfig, ModelEvaluationConfig, ModelPusherConfig
 from finance_complaint.entity.config_entity import DataTransformationConfig
 from finance_complaint.constant import *
-
+from finance_complaint.utils import create_directories
 from finance_complaint.logger import logger
 from finance_complaint.exception import FinanceException
 import os, sys
@@ -85,7 +86,8 @@ class FinanceConfig:
             file_name=DATA_INGESTION_FILE_NAME,
             feature_store_dir=os.path.join(data_ingestion_master_dir, DATA_INGESTION_FEATURE_STORE_DIR),
             failed_dir=os.path.join(data_ingestion_dir, DATA_INGESTION_FAILED_DIR),
-            metadata_file_path=metadata_file_path
+            metadata_file_path=metadata_file_path,
+            datasource_url=DATA_INGESTION_DATA_SOURCE_URL
 
         )
         logger.info(f"Data ingestion config: {data_ingestion_config}")
@@ -134,7 +136,6 @@ class FinanceConfig:
                 transformed_test_dir=transformed_test_data_dir,
                 transformed_train_dir=transformed_train_data_dir,
                 file_name=DATA_TRANSFORMATION_FILE_NAME,
-                expected_accuracy=DATA_TRANSFORMATION_EXPECTED_ACCURACY,
                 test_size=DATA_TRANSFORMATION_TEST_SIZE,
             )
 
@@ -143,9 +144,56 @@ class FinanceConfig:
         except Exception as e:
             raise FinanceException(e, sys)
 
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        try:
+            model_trainer_dir = os.path.join(self.pipeline_config.artifact_dir,
+                                             MODEL_TRAINER_DIR, self.timestamp)
+            trained_model_file_path = os.path.join(
+                model_trainer_dir, MODEL_TRAINER_TRAINED_MODEL_DIR, MODEL_TRAINER_MODEL_NAME
+            )
+            label_indexer_model_dir = os.path.join(
+                model_trainer_dir, MODEL_TRAINER_LABEL_INDEXER_DIR
+            )
+            model_trainer_config = ModelTrainerConfig(base_accuracy=MODEL_TRAINER_BASE_ACCURACY,
+                                                      trained_model_file_path=trained_model_file_path,
+                                                      metric_list=MODEL_TRAINER_MODEL_METRIC_NAMES,
+                                                      label_indexer_model_dir=label_indexer_model_dir
+                                                      )
+            logger.info(f"Model trainer config: {model_trainer_config}")
+            return model_trainer_config
+        except Exception as e:
+            raise FinanceException(e, sys)
 
-    def get_model_evaluation_config(self) -> None:
-        ...
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        try:
+            model_evaluation_dir = os.path.join(self.pipeline_config.artifact_dir,
+                                                MODEL_EVALUATION_DIR)
 
-    def get_model_pusher_config(self) -> None:
-        ...
+            model_evaluation_report_file_path = os.path.join(
+                model_evaluation_dir, MODEL_EVALUATION_REPORT_DIR, MODEL_EVALUATION_REPORT_FILE_NAME
+            )
+
+            model_evaluation_config = ModelEvaluationConfig(
+                bucket_name=S3_MODEL_BUCKET_NAME,
+                model_dir=S3_MODEL_DIR_KEY,
+                model_evaluation_report_file_path=model_evaluation_report_file_path,
+                threshold=MODEL_EVALUATION_THRESHOLD_VALUE,
+                metric_list=MODEL_EVALUATION_METRIC_NAMES,
+
+            )
+            logger.info(f"Model evaluation config: [{model_evaluation_config}]")
+            return model_evaluation_config
+
+        except Exception as e:
+            raise FinanceException(e, sys)
+
+    def get_model_pusher_config(self) -> ModelPusherConfig:
+        try:
+            model_pusher_config = ModelPusherConfig(
+                model_dir=S3_MODEL_DIR_KEY,
+                bucket_name=S3_MODEL_BUCKET_NAME
+            )
+            logger.info(f"Model pusher config: {model_pusher_config}")
+            return model_pusher_config
+        except  Exception as e:
+            raise FinanceException(e, sys)

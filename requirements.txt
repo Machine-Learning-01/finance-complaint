@@ -1,8 +1,9 @@
-pandas
 requests
 jupyterlab
 pyspark==3.2.1
 PyYAML
 ipykernel
-petastorm[torch]
+boto3
+dnspython
+pymongo[srv]
 -e .

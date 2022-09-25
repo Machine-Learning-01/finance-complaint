@@ -8,6 +8,8 @@ import sys
 from finance_complaint.entity.artifact_entity import DataTransformationArtifact
 if __name__ == "__main__":
     try:
+        #print(os.getenv('avn'))
+        # Creating an instance of the FinanceConfig class.
         finance_config = FinanceConfig()
         pipeline = Pipeline(finance_config)
 

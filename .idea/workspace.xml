@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c2af4ee9-e006-43aa-b5dc-85463903850d" name="Changes" comment="Basic structured done.">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/component/model_evaluation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/component/model_pusher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/component/model_trainer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/config/spark_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/env_var_key.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/model_evaluation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/model_trainer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/data_access/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/data_access/model_eval_artifact.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance_complaint/entity/estimator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.bash_history" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/official.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EDA.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FEATURE.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Untitled.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled1.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/component/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_ingestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/data_ingestion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/data_transformation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/data_validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/config/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/data_ingestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/data_ingestion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/data_transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/data_transformation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/artifact_entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/artifact_entity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/complaint_column.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/complaint_column.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/config_entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/config_entity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/metadata_entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/metadata_entity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/spark_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/logger/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/logger/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/ml/feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/ml/feature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/pipeline/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/pipeline/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/processing.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing.ipynb" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectId" id="2EG0GFKA4uj6af8gjhWuHEaWg1a" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/avnish/iNeuron_Private_Intelligence_Limited/BigDataProject/kafka-car-dekho&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/finance_complaint/config" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.test">
+    <configuration name="finance-complaint" type="PythonConfigurationType" factoryName="Python">
+      <module name="finance_complaint" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="finance_complaint" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="avn" value="2" />
+        <env name="AWS_ACCESS_KEY_ID" value="AKIAUHVGF4HPR3Q64IIG" />
+        <env name="AWS_SECRET_ACCESS_KEY" value="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" />
+        <env name="MONGO_DB_PASSWORD" value="RsPGmJUa69n558n" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="model_trainer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="official" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/finance_complaint/component" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/finance_complaint/component/model_trainer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="finance_complaint" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="avn" value="2" />
+        <env name="AWS_ACCESS_KEY_ID" value="AKIAUHVGF4HPR3Q64IIG" />
+        <env name="AWS_SECRET_ACCESS_KEY" value="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" />
+        <env name="MONGO_DB_PASSWORD" value="RsPGmJUa69n558n" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.finance-complaint" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.model_trainer" />
+      <item itemvalue="Python.test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.model_trainer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c2af4ee9-e006-43aa-b5dc-85463903850d" name="Changes" comment="" />
+      <created>1662206515957</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1662206515957</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Basic structured done.">
+      <created>1662207602776</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1662207602776</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Basic structured done.">
+      <created>1662275841174</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1662275841174</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Basic structured done.">
+      <created>1662275847133</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1662275847133</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Basic structured done.">
+      <created>1662275870765</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1662275870765</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Basic structured done.">
+      <created>1662281344369</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1662281344369</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Basic structured done.">
+      <created>1662290831793</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1662290831793</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Basic structured done.">
+      <created>1662293354030</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1662293354030</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Basic structured done.">
+      <created>1662293359295</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1662293359295</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Basic structured done.">
+      <created>1662403925910</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1662403925910</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Basic structured done.">
+      <created>1662730683721</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1662730683721</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Basic structured done.">
+      <created>1662794934301</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1662794934301</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Basic structured done.">
+      <created>1662795161073</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1662795161073</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Basic structured done.">
+      <created>1662994998041</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1662994998041</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Basic structured done.">
+      <created>1662995011957</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1662995011957</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Basic structured done.">
+      <created>1662995032990</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1662995032990</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Basic structured done.">
+      <created>1663066719693</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1663066719693</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Basic structured done.">
+      <created>1663078735796</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1663078735796</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Basic structured done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic structured done." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../env/venv/lib/python3.8/site-packages/botocore/auth.py</url>
+          <line>415</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/finance_complaint/component/model_evaluation.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/finance_complaint/entity/estimator.py</url>
+          <line>305</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="pipeline._paramMap[Pipeline_0def54046350__stages][3]" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

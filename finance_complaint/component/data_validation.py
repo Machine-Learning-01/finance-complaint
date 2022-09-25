@@ -1,18 +1,12 @@
-from binhex import FInfo
-import re
-from tkinter import E
 from finance_complaint.exception import FinanceException
 from finance_complaint.logger import logger
 from finance_complaint.entity.artifact_entity import DataIngestionArtifact
-from pyspark.sql.functions import col, desc
 from finance_complaint.entity.config_entity import DataValidationConfig
-from finance_complaint.entity.spark_manager import spark_session
+from finance_complaint.config.spark_manager import spark_session
 from pyspark.sql import DataFrame
 import os, sys
 from typing import List, Dict
-from pyspark.sql import Row
 from pyspark.sql.functions import col
-from pyspark.sql.types import LongType, TimestampType
 from finance_complaint.entity.complaint_column import ComplaintColumn
 from collections import namedtuple
 
@@ -29,13 +23,15 @@ class DataValidation(ComplaintColumn):
     def __init__(self,
                  data_validation_config: DataValidationConfig,
                  data_ingestion_artifact: DataIngestionArtifact,
-                 table_name: str = COMPLAINT_TABLE
+                 table_name: str = COMPLAINT_TABLE,
+                 schema=ComplaintColumn()
                  ):
         try:
             super().__init__()
             self.data_ingestion_artifact: DataIngestionArtifact = data_ingestion_artifact
             self.data_validation_config = data_validation_config
             self.table_name = table_name
+            self.schema = schema
         except Exception as e:
             raise FinanceException(e, sys) from e
 
@@ -73,7 +69,7 @@ class DataValidation(ComplaintColumn):
         try:
             missing_report: Dict[str, MissingReport] = self.get_missing_report(dataframe=dataframe)
 
-            unwanted_column: List[str] = self.unwanted_columns
+            unwanted_column: List[str] = self.schema.unwanted_columns
             for column in missing_report:
                 if missing_report[column].missing_percentage > (threshold * 100):
                     unwanted_column.append(column)
@@ -117,12 +113,12 @@ class DataValidation(ComplaintColumn):
 
     def is_required_columns_exist(self, dataframe: DataFrame):
         try:
-            columns = list(filter(lambda x: x in self.required_columns,
+            columns = list(filter(lambda x: x in self.schema.required_columns,
                                   dataframe.columns))
 
-            if len(columns) != len(self.required_columns):
+            if len(columns) != len(self.schema.required_columns):
                 raise Exception(f"Required column missing\n\
-                 Expected columns: {self.required_columns}\n\
+                 Expected columns: {self.schema.required_columns}\n\
                  Found columns: {columns}\
                  ")
 

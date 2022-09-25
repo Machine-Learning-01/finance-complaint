@@ -1,20 +1,17 @@
 from pyspark import keyword_only  ## < 2.0 -> pyspark.ml.util.keyword_only
 from pyspark.ml import Transformer
-from pyspark.ml.param.shared import HasInputCol, HasOutputCol, Param, Params, TypeConverters, HasOutputCols, \
+from pyspark.ml.param.shared import Param, Params, TypeConverters, HasOutputCols, \
     HasInputCols
 # Available in PySpark >= 2.3.0 
 from pyspark.ml.util import DefaultParamsReadable, DefaultParamsWritable
-from pyspark.sql.functions import udf
-from pyspark.sql.types import ArrayType, StringType
 from pyspark.ml import Estimator
 from pyspark.sql import DataFrame
 from pyspark.sql.functions import desc
-from pyspark.sql.functions import col, abs, when, regexp_replace
+from pyspark.sql.functions import col, abs
 from typing import List
-from pyspark.sql.types import TimestampType, LongType, FloatType, IntegerType
+from pyspark.sql.types import TimestampType, LongType
 from finance_complaint.logger import logger
-from typing import Dict
-from finance_complaint.entity.spark_manager import spark_session
+from finance_complaint.config.spark_manager import spark_session
 
 
 class FrequencyEncoder(Estimator, HasInputCols, HasOutputCols,

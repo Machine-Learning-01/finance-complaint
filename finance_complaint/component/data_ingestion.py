@@ -1,7 +1,7 @@
 from finance_complaint.config import FinanceConfig
 from finance_complaint.entity.config_entity import DataIngestionConfig
 from finance_complaint.exception import FinanceException
-from finance_complaint.entity.spark_manager import spark_session
+from finance_complaint.config.spark_manager import spark_session
 import os, sys
 from finance_complaint.entity.metadata_entity import DataIngestionMetadata
 import pandas as pd
@@ -16,10 +16,14 @@ import uuid
 
 DownloadUrl = namedtuple("DownloadUrl", ["url", "file_path", "n_retry"])
 
+from datetime import datetime
+
 
 class DataIngestion:
 
-    def __init__(self, data_ingestion_config: DataIngestionConfig, n_retry: int = 5, n_month_interval: int = 3):
+    # Used to download data in chunks.
+    # Used to download data in chunks.
+    def __init__(self, data_ingestion_config: DataIngestionConfig, n_retry: int = 5, ):
         """
         data_ingestion_config: Data Ingestion config
         n_retry: Number of retry filed should be tried to download in case of failure encountered
@@ -30,46 +34,60 @@ class DataIngestion:
             self.data_ingestion_config = data_ingestion_config
             self.failed_download_urls: List[DownloadUrl] = []
             self.n_retry = n_retry
-            self.n_month_interval = n_month_interval
 
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def download_monthly_files(self, n_month_interval_url: int = None) -> List[DownloadUrl]:
+    def get_required_interval(self):
+        start_date = datetime.strptime(self.data_ingestion_config.from_date, "%Y-%m-%d")
+        end_date = datetime.strptime(self.data_ingestion_config.to_date, "%Y-%m-%d")
+        n_diff_days = (end_date - start_date).days
+        freq = None
+        if n_diff_days > 365:
+            freq = "Y"
+        elif n_diff_days > 30:
+            freq = "M"
+        elif n_diff_days > 7:
+            freq = "W"
+        logger.debug(f"{n_diff_days} hence freq: {freq}")
+        if freq is None:
+            intervals = pd.date_range(start=self.data_ingestion_config.from_date,
+                                      end=self.data_ingestion_config.to_date,
+                                      periods=2).astype('str').tolist()
+        else:
+
+            intervals = pd.date_range(start=self.data_ingestion_config.from_date,
+                                      end=self.data_ingestion_config.to_date,
+                                      freq=freq).astype('str').tolist()
+        logger.debug(f"Prepared Interval: {intervals}")
+        if self.data_ingestion_config.to_date not in intervals:
+            intervals.append(self.data_ingestion_config.to_date)
+        return intervals
+
+    def download_files(self, n_day_interval_url: int = None):
         """
         n_month_interval_url: if not provided then information default value will be set
         =======================================================================================
         returns: List of DownloadUrl = namedtuple("DownloadUrl", ["url", "file_path", "n_retry"])
         """
         try:
-            if n_month_interval_url is None:
-                n_month_interval_url = self.n_month_interval
-
-            # month interval
-            month_interval = list(pd.date_range(start=self.data_ingestion_config.from_date,
-                                                end=self.data_ingestion_config.to_date,
-                                                freq="m").astype('str'))
-
-            download_urls = []
-            for index in range(n_month_interval_url, len(month_interval), n_month_interval_url):
-                from_date, to_date = month_interval[index - n_month_interval_url], month_interval[index]
-                logger.info(f"Generating data download url between {from_date} and {to_date}")
-                url = f"https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/" \
-                      f"?date_received_max={to_date}&date_received_min={from_date}" \
-                      f"&field=all&format=json"
-
-                logger.info(f"Url: {url}")
+            required_interval = self.get_required_interval()
+            logger.info("Started downloading files")
+            for index in range(1, len(required_interval)):
+                from_date, to_date = required_interval[index - 1], required_interval[index]
+                logger.debug(f"Generating data download url between {from_date} and {to_date}")
+                datasource_url: str = self.data_ingestion_config.datasource_url
+                url = datasource_url.replace("<todate>", to_date).replace("<fromdate>", from_date)
+                logger.debug(f"Url: {url}")
                 file_name = f"{self.data_ingestion_config.file_name}_{from_date}_{to_date}.json"
                 file_path = os.path.join(self.data_ingestion_config.download_dir, file_name)
                 download_url = DownloadUrl(url=url, file_path=file_path, n_retry=self.n_retry)
-                download_urls.append(download_url)
                 self.download_data(download_url=download_url)
-            logger.info(download_urls)
-            return download_urls
+            logger.info(f"File download completed")
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def convert_files_to_parquet(self, data_dir=None, json_data_dir=None, output_file_name=None) -> str:
+    def convert_files_to_parquet(self, ) -> str:
         """
         downloaded files will be converted and merged into single parquet file
         json_data_dir: downloaded json file directory
@@ -79,28 +97,20 @@ class DataIngestion:
         returns output_file_path
         """
         try:
-            if json_data_dir is None:
-                json_data_dir = self.data_ingestion_config.download_dir
-
-            if data_dir is None:
-                data_dir = self.data_ingestion_config.feature_store_dir
-
-            if output_file_name is None:
-                output_file_name = self.data_ingestion_config.file_name
-
+            json_data_dir = self.data_ingestion_config.download_dir
+            data_dir = self.data_ingestion_config.feature_store_dir
+            output_file_name = self.data_ingestion_config.file_name
             os.makedirs(data_dir, exist_ok=True)
-
             file_path = os.path.join(data_dir, f"{output_file_name}")
-
             logger.info(f"Parquet file will be created at: {file_path}")
-
             if not os.path.exists(json_data_dir):
                 return file_path
-
             for file_name in os.listdir(json_data_dir):
-                df = spark_session.read.json(os.path.join(json_data_dir, file_name))
-                df.write.mode('append').parquet(file_path)
-
+                json_file_path = os.path.join(json_data_dir, file_name)
+                logger.debug(f"Converting {json_file_path} into parquet format at {file_path}")
+                df = spark_session.read.json(json_file_path)
+                if df.count() > 0:
+                    df.write.mode('append').parquet(file_path)
             return file_path
         except Exception as e:
             raise FinanceException(e, sys)
@@ -152,7 +162,7 @@ class DataIngestion:
             data = requests.get(download_url.url, params={'User-agent': f'your bot {uuid.uuid4()}'})
 
             try:
-                logger.info(f"Started writing downlaoded data into json file: {download_url.file_path}")
+                logger.info(f"Started writing downloaded data into json file: {download_url.file_path}")
                 # saving downloaded data into hard disk
                 with open(download_url.file_path, "w") as file_obj:
                     finance_complaint_data = list(map(lambda x: x["_source"],
@@ -194,10 +204,11 @@ class DataIngestion:
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
             logger.info(f"Started downloading json file")
-            self.download_monthly_files()
+            if self.data_ingestion_config.from_date != self.data_ingestion_config.to_date:
+                self.download_files()
 
             if os.path.exists(self.data_ingestion_config.download_dir):
-                logger.info(f"Converting and combining downloaded json into csv file")
+                logger.info(f"Converting and combining downloaded json into parquet file")
                 file_path = self.convert_files_to_parquet()
                 self.write_metadata(file_path=file_path)
 
@@ -220,7 +231,7 @@ def main():
     try:
         config = FinanceConfig()
         data_ingestion_config = config.get_data_ingestion_config()
-        data_ingestion = DataIngestion(data_ingestion_config=data_ingestion_config, n_month_interval=6)
+        data_ingestion = DataIngestion(data_ingestion_config=data_ingestion_config, n_day_interval=6)
         data_ingestion.initiate_data_ingestion()
     except Exception as e:
         raise FinanceException(e, sys)
