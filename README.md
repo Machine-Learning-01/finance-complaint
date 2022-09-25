@@ -37,8 +37,10 @@ update the metainfo
 ```
 pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 -f https://download.pytorch.org/whl/torch_stable.html
 ```
---
-conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+
+```bazaar
+docker build -t fc:lts .
+```
 ```
 docker run -it -p  8080:4040 -v $(pwd)/finance_artifact:/app/finance_artifact fc:lts bash
 ```
