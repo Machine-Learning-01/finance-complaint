@@ -1,5 +1,5 @@
 from time import strftime
-from finance_complaint.entity.config_entity import DataIngestionConfig, PipelineConfig, DataValidationConfig, \
+from finance_complaint.entity.config_entity import DataIngestionConfig, TrainingPipelineConfig, DataValidationConfig, \
     ModelTrainerConfig, ModelEvaluationConfig, ModelPusherConfig
 from finance_complaint.entity.config_entity import DataTransformationConfig
 from finance_complaint.constant import *
@@ -24,7 +24,7 @@ class FinanceConfig:
         self.pipeline_name = pipeline_name
         self.pipeline_config = self.get_pipeline_config()
 
-    def get_pipeline_config(self) -> PipelineConfig:
+    def get_pipeline_config(self) -> TrainingPipelineConfig:
         """
         This function will provide pipeline config information
 
@@ -33,8 +33,8 @@ class FinanceConfig:
         """
         try:
             artifact_dir = PIPELINE_ARTIFACT_DIR
-            pipeline_config = PipelineConfig(pipeline_name=self.pipeline_name,
-                                             artifact_dir=artifact_dir)
+            pipeline_config = TrainingPipelineConfig(pipeline_name=self.pipeline_name,
+                                                     artifact_dir=artifact_dir)
 
             logger.info(f"Pipeline configuration: {pipeline_config}")
 

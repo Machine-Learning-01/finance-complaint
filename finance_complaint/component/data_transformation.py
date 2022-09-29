@@ -1,6 +1,6 @@
 import os
 
-from finance_complaint.entity.complaint_column import ComplaintColumn
+from finance_complaint.entity.schema import FinanceDataSchema
 import sys
 from pyspark.ml.feature import StandardScaler, VectorAssembler, OneHotEncoder, StringIndexer, Imputer
 from pyspark.ml.pipeline import Pipeline
@@ -16,12 +16,11 @@ from pyspark.ml.feature import IDF, Tokenizer, HashingTF
 from pyspark.sql.functions import col, rand
 
 
-
 class DataTransformation():
 
     def __init__(self, data_validation_artifact: DataValidationArtifact,
                  data_transformation_config: DataTransformationConfig,
-                 schema=ComplaintColumn()
+                 schema=FinanceDataSchema()
                  ):
         try:
             super().__init__()
@@ -135,7 +134,7 @@ class DataTransformation():
         try:
             logger.info(f">>>>>>>>>>>Started data transformation <<<<<<<<<<<<<<<")
             dataframe: DataFrame = self.read_data()
-            #dataframe = self.get_balanced_shuffled_dataframe(dataframe=dataframe)
+            # dataframe = self.get_balanced_shuffled_dataframe(dataframe=dataframe)
             logger.info(f"Number of row: [{dataframe.count()}] and column: [{len(dataframe.columns)}]")
 
             test_size = self.data_tf_config.test_size
@@ -176,7 +175,7 @@ class DataTransformation():
             logger.info(f"Saving transformation pipeline at: [{export_pipeline_file_path}]")
             transformed_pipeline.save(export_pipeline_file_path)
             logger.info(f"Saving transformed train data at: [{transformed_train_data_file_path}]")
-            print(transformed_trained_dataframe.count(),len(transformed_trained_dataframe.columns))
+            print(transformed_trained_dataframe.count(), len(transformed_trained_dataframe.columns))
             transformed_trained_dataframe.write.parquet(transformed_train_data_file_path)
 
             logger.info(f"Saving transformed test data at: [{transformed_test_data_file_path}]")

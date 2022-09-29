@@ -1,6 +1,6 @@
 import os
 
-from finance_complaint.entity.complaint_column import ComplaintColumn
+from finance_complaint.entity.schema import FinanceDataSchema
 import sys
 from pyspark.ml.feature import StringIndexer, StringIndexerModel
 from pyspark.ml.pipeline import Pipeline, PipelineModel
@@ -22,7 +22,7 @@ class ModelTrainer:
     def __init__(self,
                  data_transformation_artifact: DataTransformationArtifact,
                  model_trainer_config: ModelTrainerConfig,
-                 schema=ComplaintColumn()
+                 schema=FinanceDataSchema()
                  ):
         self.data_transformation_artifact = data_transformation_artifact
         self.model_trainer_config = model_trainer_config

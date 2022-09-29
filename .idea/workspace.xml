@@ -5,50 +5,251 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2af4ee9-e006-43aa-b5dc-85463903850d" name="Changes" comment="Basic structured done.">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/component/model_evaluation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/component/model_pusher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/component/model_trainer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/config/spark_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/env_var_key.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/model_evaluation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/model_trainer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/data_access/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/data_access/model_eval_artifact.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/entity/estimator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.bash_history" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/finance_complaint.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/finance_complaint.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/official.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EDA.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FEATURE.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Untitled.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled1.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_ingestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/data_ingestion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/data_transformation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/data_validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/component/model_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/model_evaluation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/component/model_trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/model_trainer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance_complaint/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/config/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/data_ingestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/data_ingestion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/data_transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/data_transformation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/artifact_entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/artifact_entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/complaint_column.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/complaint_column.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/config/spark_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/config/spark_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/data_access/model_eval_artifact.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/data_access/model_eval_artifact.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/data_access/mongo_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/config/mongo_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/complaint_column.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/schema.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance_complaint/entity/config_entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/config_entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/metadata_entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/metadata_entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/spark_manager.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/logger/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/logger/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/ml/feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/ml/feature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/estimator.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/estimator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance_complaint/pipeline/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/pipeline/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/utils/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/processing.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/.part-00000-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/.part-00001-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/.part-00002-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/.part-00003-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/.part-00004-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/.part-00005-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/.part-00006-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/.part-00007-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/_SUCCESS" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/pipeline/prediction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/part-00000-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/part-00001-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/part-00002-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/part-00003-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/part-00004-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/part-00005-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/part-00006-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_181904/part-00007-8d8ab685-e7b1-41d8-baff-59148c300696-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/.part-00000-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/.part-00001-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/.part-00002-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/.part-00003-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/.part-00004-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/.part-00005-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/.part-00006-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/.part-00007-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/_SUCCESS" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/pipeline/training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/part-00000-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/part-00001-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/part-00002-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/part-00003-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/part-00004-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/part-00005-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/part-00006-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_files/file_20220924_182717/part-00007-cd030b12-3bcb-4950-b484-f8cfe8abd5cc-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/00_DerivedFeatureGenerator_aa609c89148f/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/00_DerivedFeatureGenerator_aa609c89148f/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/00_DerivedFeatureGenerator_aa609c89148f/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/00_DerivedFeatureGenerator_aa609c89148f/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/01_Imputer_9dff525120a0/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/01_Imputer_9dff525120a0/data/.part-00000-4d832624-680b-4d89-9798-423b1c87eeb6-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/01_Imputer_9dff525120a0/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/01_Imputer_9dff525120a0/data/part-00000-4d832624-680b-4d89-9798-423b1c87eeb6-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/01_Imputer_9dff525120a0/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/01_Imputer_9dff525120a0/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/01_Imputer_9dff525120a0/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/01_Imputer_9dff525120a0/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/02_FrequencyImputerModel_0e7821cbdb4a/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/02_FrequencyImputerModel_0e7821cbdb4a/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/02_FrequencyImputerModel_0e7821cbdb4a/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/02_FrequencyImputerModel_0e7821cbdb4a/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/03_StringIndexer_d4c5ffa107ee/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/03_StringIndexer_d4c5ffa107ee/data/.part-00000-1ca0a7b6-4333-4100-854f-584f2731dc3b-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/03_StringIndexer_d4c5ffa107ee/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/03_StringIndexer_d4c5ffa107ee/data/part-00000-1ca0a7b6-4333-4100-854f-584f2731dc3b-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/03_StringIndexer_d4c5ffa107ee/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/03_StringIndexer_d4c5ffa107ee/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/03_StringIndexer_d4c5ffa107ee/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/03_StringIndexer_d4c5ffa107ee/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/04_StringIndexer_a3290b361ecc/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/04_StringIndexer_a3290b361ecc/data/.part-00000-81c4658a-3052-408d-825e-734b18a180e7-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/04_StringIndexer_a3290b361ecc/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/04_StringIndexer_a3290b361ecc/data/part-00000-81c4658a-3052-408d-825e-734b18a180e7-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/04_StringIndexer_a3290b361ecc/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/04_StringIndexer_a3290b361ecc/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/04_StringIndexer_a3290b361ecc/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/04_StringIndexer_a3290b361ecc/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/05_StringIndexer_15ea7920ee02/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/05_StringIndexer_15ea7920ee02/data/.part-00000-0f7b10bb-86ba-4bb5-8985-c7f582291e37-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/05_StringIndexer_15ea7920ee02/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/05_StringIndexer_15ea7920ee02/data/part-00000-0f7b10bb-86ba-4bb5-8985-c7f582291e37-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/05_StringIndexer_15ea7920ee02/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/05_StringIndexer_15ea7920ee02/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/05_StringIndexer_15ea7920ee02/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/05_StringIndexer_15ea7920ee02/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/06_OneHotEncoder_bbe490b76f3a/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/06_OneHotEncoder_bbe490b76f3a/data/.part-00000-0fd74533-f5a0-4fe2-8f9a-00d254ba9b66-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/06_OneHotEncoder_bbe490b76f3a/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/06_OneHotEncoder_bbe490b76f3a/data/part-00000-0fd74533-f5a0-4fe2-8f9a-00d254ba9b66-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/06_OneHotEncoder_bbe490b76f3a/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/06_OneHotEncoder_bbe490b76f3a/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/06_OneHotEncoder_bbe490b76f3a/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/06_OneHotEncoder_bbe490b76f3a/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/07_Tokenizer_d2c6c249481a/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/07_Tokenizer_d2c6c249481a/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/07_Tokenizer_d2c6c249481a/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/07_Tokenizer_d2c6c249481a/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/08_HashingTF_e2fca3cfd94f/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/08_HashingTF_e2fca3cfd94f/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/08_HashingTF_e2fca3cfd94f/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/08_HashingTF_e2fca3cfd94f/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/09_IDF_556fe32e34f7/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/09_IDF_556fe32e34f7/data/.part-00000-e3ef3c45-cf4f-46e6-876a-7203de6ef0e2-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/09_IDF_556fe32e34f7/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/09_IDF_556fe32e34f7/data/part-00000-e3ef3c45-cf4f-46e6-876a-7203de6ef0e2-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/09_IDF_556fe32e34f7/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/09_IDF_556fe32e34f7/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/09_IDF_556fe32e34f7/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/09_IDF_556fe32e34f7/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/10_VectorAssembler_0e5ce3309ee1/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/10_VectorAssembler_0e5ce3309ee1/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/10_VectorAssembler_0e5ce3309ee1/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/10_VectorAssembler_0e5ce3309ee1/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/11_StandardScaler_4edf40a86ced/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/11_StandardScaler_4edf40a86ced/data/.part-00000-952a4503-52bf-4913-8235-3828f553c4c2-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/11_StandardScaler_4edf40a86ced/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/11_StandardScaler_4edf40a86ced/data/part-00000-952a4503-52bf-4913-8235-3828f553c4c2-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/11_StandardScaler_4edf40a86ced/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/11_StandardScaler_4edf40a86ced/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/11_StandardScaler_4edf40a86ced/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/11_StandardScaler_4edf40a86ced/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/data/.part-00000-335cc04d-90f4-47ba-a6ac-6bef98c64ed9-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/data/part-00000-335cc04d-90f4-47ba-a6ac-6bef98c64ed9-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/treesMetadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/treesMetadata/.part-00000-82bd53ff-dba7-4eb3-86fb-856bfd563db3-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/treesMetadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/12_RandomForestClassifier_1de8505ab7b6/treesMetadata/part-00000-82bd53ff-dba7-4eb3-86fb-856bfd563db3-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/13_IndexToString_f2263abdc2e7/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/13_IndexToString_f2263abdc2e7/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/13_IndexToString_f2263abdc2e7/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1663960392/finance_estimator/stages/13_IndexToString_f2263abdc2e7/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/00_DerivedFeatureGenerator_42fc4cf06600/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/00_DerivedFeatureGenerator_42fc4cf06600/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/00_DerivedFeatureGenerator_42fc4cf06600/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/00_DerivedFeatureGenerator_42fc4cf06600/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/01_Imputer_58b808882817/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/01_Imputer_58b808882817/data/.part-00000-0abede4d-a377-4949-b6cb-023f7cadf742-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/01_Imputer_58b808882817/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/01_Imputer_58b808882817/data/part-00000-0abede4d-a377-4949-b6cb-023f7cadf742-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/01_Imputer_58b808882817/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/01_Imputer_58b808882817/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/01_Imputer_58b808882817/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/01_Imputer_58b808882817/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/02_FrequencyImputerModel_d1a672ceed77/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/02_FrequencyImputerModel_d1a672ceed77/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/02_FrequencyImputerModel_d1a672ceed77/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/02_FrequencyImputerModel_d1a672ceed77/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/03_StringIndexer_246853f1bbf4/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/03_StringIndexer_246853f1bbf4/data/.part-00000-73617cb2-6b5c-43bd-a82d-a2cbf4a5b78f-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/03_StringIndexer_246853f1bbf4/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/03_StringIndexer_246853f1bbf4/data/part-00000-73617cb2-6b5c-43bd-a82d-a2cbf4a5b78f-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/03_StringIndexer_246853f1bbf4/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/03_StringIndexer_246853f1bbf4/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/03_StringIndexer_246853f1bbf4/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/03_StringIndexer_246853f1bbf4/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/04_StringIndexer_5b00dbc7381f/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/04_StringIndexer_5b00dbc7381f/data/.part-00000-56a39f7a-be1d-4a4b-92fe-af11a46959ce-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/04_StringIndexer_5b00dbc7381f/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/04_StringIndexer_5b00dbc7381f/data/part-00000-56a39f7a-be1d-4a4b-92fe-af11a46959ce-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/04_StringIndexer_5b00dbc7381f/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/04_StringIndexer_5b00dbc7381f/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/04_StringIndexer_5b00dbc7381f/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/04_StringIndexer_5b00dbc7381f/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/05_StringIndexer_be1403732254/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/05_StringIndexer_be1403732254/data/.part-00000-eadcc57d-ceee-4635-845a-730f56590b79-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/05_StringIndexer_be1403732254/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/05_StringIndexer_be1403732254/data/part-00000-eadcc57d-ceee-4635-845a-730f56590b79-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/05_StringIndexer_be1403732254/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/05_StringIndexer_be1403732254/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/05_StringIndexer_be1403732254/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/05_StringIndexer_be1403732254/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/06_OneHotEncoder_48562b071285/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/06_OneHotEncoder_48562b071285/data/.part-00000-6c9754ab-2c76-4906-9b45-8672f3b65717-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/06_OneHotEncoder_48562b071285/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/06_OneHotEncoder_48562b071285/data/part-00000-6c9754ab-2c76-4906-9b45-8672f3b65717-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/06_OneHotEncoder_48562b071285/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/06_OneHotEncoder_48562b071285/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/06_OneHotEncoder_48562b071285/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/06_OneHotEncoder_48562b071285/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/07_Tokenizer_c564073a2c9d/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/07_Tokenizer_c564073a2c9d/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/07_Tokenizer_c564073a2c9d/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/07_Tokenizer_c564073a2c9d/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/08_HashingTF_1c09fcda7b3f/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/08_HashingTF_1c09fcda7b3f/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/08_HashingTF_1c09fcda7b3f/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/08_HashingTF_1c09fcda7b3f/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/09_IDF_528d882406a6/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/09_IDF_528d882406a6/data/.part-00000-e114bead-5f65-4abd-873f-f3b2d7b86916-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/09_IDF_528d882406a6/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/09_IDF_528d882406a6/data/part-00000-e114bead-5f65-4abd-873f-f3b2d7b86916-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/09_IDF_528d882406a6/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/09_IDF_528d882406a6/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/09_IDF_528d882406a6/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/09_IDF_528d882406a6/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/10_VectorAssembler_99617bf5791d/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/10_VectorAssembler_99617bf5791d/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/10_VectorAssembler_99617bf5791d/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/10_VectorAssembler_99617bf5791d/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/11_StandardScaler_5c2b384726f6/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/11_StandardScaler_5c2b384726f6/data/.part-00000-e0bf8eeb-bf9e-46e1-b08e-d51753a7bd03-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/11_StandardScaler_5c2b384726f6/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/11_StandardScaler_5c2b384726f6/data/part-00000-e0bf8eeb-bf9e-46e1-b08e-d51753a7bd03-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/11_StandardScaler_5c2b384726f6/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/11_StandardScaler_5c2b384726f6/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/11_StandardScaler_5c2b384726f6/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/11_StandardScaler_5c2b384726f6/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/data/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/data/.part-00000-b236af2a-aa42-4aa7-a0c8-fd1b7be74107-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/data/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/data/part-00000-b236af2a-aa42-4aa7-a0c8-fd1b7be74107-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/treesMetadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/treesMetadata/.part-00000-e7bd1a37-62e5-4d60-9fc1-c8b8f4cae1ee-c000.snappy.parquet.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/treesMetadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/12_RandomForestClassifier_ae63b3deea07/treesMetadata/part-00000-e7bd1a37-62e5-4d60-9fc1-c8b8f4cae1ee-c000.snappy.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/13_IndexToString_c2be14effb06/metadata/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/13_IndexToString_c2be14effb06/metadata/.part-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/13_IndexToString_c2be14effb06/metadata/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_models/1664010613/finance_estimator/stages/13_IndexToString_c2be14effb06/metadata/part-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,17 +284,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/avnish/iNeuron_Private_Intelligence_Limited/BigDataProject/kafka-car-dekho&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/avnish/iNeuron_Private_Intelligence_Limited/industry_ready_project/projects/finance_complaint/venv/bin",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/finance_complaint/config" />
+      <recent name="$PROJECT_DIR$/finance_complaint/constant" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -355,7 +557,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/test.py</url>
-          <line>66</line>
+          <line>65</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -364,19 +566,14 @@
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/finance_complaint/component/model_evaluation.py</url>
-          <line>69</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/finance_complaint/entity/estimator.py</url>
           <line>305</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/test.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="55" />
+          <url>file://$PROJECT_DIR$/finance_complaint/component/model_evaluation.py</url>
+          <line>109</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

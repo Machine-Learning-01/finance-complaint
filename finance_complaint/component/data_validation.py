@@ -7,7 +7,7 @@ from pyspark.sql import DataFrame
 import os, sys
 from typing import List, Dict
 from pyspark.sql.functions import col
-from finance_complaint.entity.complaint_column import ComplaintColumn
+from finance_complaint.entity.schema import FinanceDataSchema
 from collections import namedtuple
 
 COMPLAINT_TABLE = "complaint"
@@ -18,13 +18,13 @@ from finance_complaint.entity.artifact_entity import DataValidationArtifact
 MissingReport = namedtuple("MissingReport", ["total_row", "missing_row", "missing_percentage"])
 
 
-class DataValidation(ComplaintColumn):
+class DataValidation(FinanceDataSchema):
 
     def __init__(self,
                  data_validation_config: DataValidationConfig,
                  data_ingestion_artifact: DataIngestionArtifact,
                  table_name: str = COMPLAINT_TABLE,
-                 schema=ComplaintColumn()
+                 schema=FinanceDataSchema()
                  ):
         try:
             super().__init__()

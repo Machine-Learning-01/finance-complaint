@@ -1,16 +1,19 @@
 from finance_complaint.exception import FinanceException
 import os, sys
+
 from finance_complaint.utils import read_yaml_file, write_yaml_file
 from collections import namedtuple
 from finance_complaint.logger import logger
-
+from finance_complaint.cloud_storage import SimpleStorageService
 DataIngestionMetadataInfo = namedtuple("DataIngestionMetadataInfo", ["from_date", "to_date", "data_file_path"])
 
 
 class DataIngestionMetadata:
 
-    def __init__(self, metadata_file_path):
+    def __init__(self, metadata_file_path,s3_key_file_path):
         self.metadata_file_path = metadata_file_path
+        self.s3_key_file_path = s3_key_file_path
+       
 
     @property
     def is_metadata_file_present(self):

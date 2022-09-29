@@ -1,4 +1,4 @@
-from finance_complaint.data_access.mongo_client import MongodbClient
+from finance_complaint.config.mongo_client import MongodbClient
 from finance_complaint.entity.artifact_entity import ModelEvaluationArtifact
 
 

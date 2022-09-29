@@ -12,10 +12,10 @@ from finance_complaint.constant import MODEL_SAVED_DIR
 from finance_complaint.constant.env_var_key import AWS_SECRET_ACCESS_KEY_ENV_KEY, AWS_ACCESS_KEY_ID_ENV_KEY
 import time
 import boto3
-from typing import List,Optional
+from typing import List, Optional
 import re
 from abc import abstractmethod, ABC
-
+from finance_complaint.config.aws_connection_config import AWSConnectionConfig
 
 class CloudEstimator(ABC):
     key = "model-registry"
@@ -139,19 +139,10 @@ class S3Estimator(CloudEstimator):
         """
         if len(kwargs) > 0:
             super().__init__(kwargs)
-        access_key_id = os.getenv(AWS_ACCESS_KEY_ID_ENV_KEY, )
-        secret_access_key = os.getenv(AWS_SECRET_ACCESS_KEY_ENV_KEY, )
-        self.s3_client = boto3.client('s3',
-                                      aws_access_key_id=access_key_id,
-                                      aws_secret_access_key=secret_access_key,
-                                      region_name=region_name
-                                      )
 
-        self.resource = boto3.resource('s3',
-                                       aws_access_key_id=access_key_id,
-                                       aws_secret_access_key=secret_access_key,
-                                       region_name=region_name
-                                       )
+        aws_connect_config = AWSConnectionConfig(region_name=region_name)
+        self.s3_client = aws_connect_config.s3_client
+        self.resource =aws_connect_config.s3_resource
 
         response = self.s3_client.list_buckets()
         # Output the bucket names
@@ -192,7 +183,7 @@ class S3Estimator(CloudEstimator):
 
         """
         if key is None:
-            key=self.key
+            key = self.key
         if not key.endswith("/"):
             key = f"{key}/"
         key = f"{key}{self.__model_dir}/"
@@ -203,7 +194,7 @@ class S3Estimator(CloudEstimator):
                 paths.append(key_summary.key)
         return paths
 
-    def get_latest_model_path(self, key: str=None) -> Optional[str]:
+    def get_latest_model_path(self, key: str = None) -> Optional[str]:
         """
 
         Args:

@@ -1,7 +1,7 @@
 from finance_complaint.entity.artifact_entity import ModelEvaluationArtifact, DataValidationArtifact, \
     ModelTrainerArtifact
 from finance_complaint.entity.config_entity import ModelEvaluationConfig
-from finance_complaint.entity.complaint_column import ComplaintColumn
+from finance_complaint.entity.schema import FinanceDataSchema
 from finance_complaint.exception import FinanceException
 from finance_complaint.logger import logger
 import sys
@@ -22,7 +22,7 @@ class ModelEvaluation:
                  data_validation_artifact: DataValidationArtifact,
                  model_trainer_artifact: ModelTrainerArtifact,
                  model_eval_config: ModelEvaluationConfig,
-                 schema=ComplaintColumn()
+                 schema=FinanceDataSchema()
                  ):
         try:
             self.model_eval_artifact_data = ModelEvaluationArtifactData()

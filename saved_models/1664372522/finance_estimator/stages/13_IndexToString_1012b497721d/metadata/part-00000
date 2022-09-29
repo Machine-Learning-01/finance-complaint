@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.IndexToString","timestamp":1664372520107,"sparkVersion":"3.2.1","uid":"IndexToString_1012b497721d","paramMap":{"outputCol":"prediction_consumer_disputed","labels":["N/A","No","Yes"],"inputCol":"prediction"},"defaultParamMap":{"outputCol":"IndexToString_1012b497721d__output"}}

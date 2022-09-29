@@ -38,6 +38,8 @@ class DataIngestion:
         except Exception as e:
             raise FinanceException(e, sys)
 
+    
+
     def get_required_interval(self):
         start_date = datetime.strptime(self.data_ingestion_config.from_date, "%Y-%m-%d")
         end_date = datetime.strptime(self.data_ingestion_config.to_date, "%Y-%m-%d")
@@ -115,6 +117,7 @@ class DataIngestion:
         except Exception as e:
             raise FinanceException(e, sys)
 
+    
     def retry_download_data(self, data, download_url: DownloadUrl):
         """
         This function help to avoid failure as it help to download failed file again
