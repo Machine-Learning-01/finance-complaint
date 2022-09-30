@@ -16,8 +16,8 @@ ENV PYSPARK_PYTHON python3
 RUN pip3 install --upgrade pip
 RUN pip3 install numpy pandas
 RUN mkdir app
-COPY dist/ app/
-COPY main.py /app
-RUN pip3 install  /app/finance_complaint-0.0.4-py3-none-any.whl > temp.txt
+COPY ./ app/
+WORKDIR app/
+RUN pip3 install -r requirements.txt
 
-CMD ["bash"]
+CMD ["python3","main.py","--t","True"]

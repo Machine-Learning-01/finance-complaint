@@ -6,3 +6,4 @@ saved_models/*
 /deployment/
 /logs/
 venv/*
+credential.txt

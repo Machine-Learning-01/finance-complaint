@@ -1,5 +1,4 @@
-from pyspark.sql import SparkSession
-from finance_complaint.constant.env_var_key import AWS_ACCESS_KEY_ID_ENV_KEY,AWS_SECRET_ACCESS_KEY_ENV_KEY
+from finance_complaint.constant.environment.variable_key import AWS_ACCESS_KEY_ID_ENV_KEY,AWS_SECRET_ACCESS_KEY_ENV_KEY
 
 import os
 from pyspark.sql import SparkSession

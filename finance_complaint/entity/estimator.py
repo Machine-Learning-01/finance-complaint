@@ -1,17 +1,13 @@
-import os, sys
+import sys
 
 from finance_complaint.exception import FinanceException
 from pyspark.ml.pipeline import PipelineModel
 from pyspark.sql import DataFrame
-from finance_complaint.constant import MODEL_SAVED_DIR
-from datetime import datetime
 
 import shutil
 import os
-from finance_complaint.constant import MODEL_SAVED_DIR
-from finance_complaint.constant.env_var_key import AWS_SECRET_ACCESS_KEY_ENV_KEY, AWS_ACCESS_KEY_ID_ENV_KEY
+from finance_complaint.constant.model import MODEL_SAVED_DIR
 import time
-import boto3
 from typing import List, Optional
 import re
 from abc import abstractmethod, ABC

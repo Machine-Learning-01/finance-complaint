@@ -1,6 +1,6 @@
 from finance_complaint.exception import FinanceException
 from finance_complaint.logger import logger
-from finance_complaint.config import FinanceConfig
+from finance_complaint.config.pipeline.training import FinanceConfig
 from finance_complaint.component import DataIngestion, DataValidation, DataTransformation, ModelTrainer, \
     ModelEvaluation, \
     ModelPusher

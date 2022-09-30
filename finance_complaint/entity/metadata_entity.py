@@ -10,9 +10,9 @@ DataIngestionMetadataInfo = namedtuple("DataIngestionMetadataInfo", ["from_date"
 
 class DataIngestionMetadata:
 
-    def __init__(self, metadata_file_path,s3_key_file_path):
+    def __init__(self, metadata_file_path,):
         self.metadata_file_path = metadata_file_path
-        self.s3_key_file_path = s3_key_file_path
+    
        
 
     @property

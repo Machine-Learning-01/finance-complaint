@@ -1,4 +1,4 @@
-from finance_complaint.config import FinanceConfig
+from finance_complaint.config.pipeline.training import FinanceConfig
 from finance_complaint.entity.config_entity import DataIngestionConfig
 from finance_complaint.exception import FinanceException
 from finance_complaint.config.spark_manager import spark_session

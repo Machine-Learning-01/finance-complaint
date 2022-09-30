@@ -5,7 +5,7 @@ __pycache__/
 airflow/*
 # C extensions
 *.so
-
+credential.txt
 .gitconfig
 
 .jupyter

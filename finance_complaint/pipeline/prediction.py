@@ -1,5 +1,5 @@
-from finance_complaint.constant import S3_MODEL_BUCKET_NAME, MODEL_SAVED_DIR, S3_MODEL_DIR_KEY
-from finance_complaint.constant.pred_file_info import S3_DATA_BUCKET_NAME, PYSPARK_S3_ROOT
+from finance_complaint.constant.model import S3_MODEL_BUCKET_NAME, S3_MODEL_DIR_KEY
+from finance_complaint.constant.prediction_pipeline_config.file_config import S3_DATA_BUCKET_NAME, PYSPARK_S3_ROOT
 from finance_complaint.entity.config_entity import PredictionPipelineConfig
 from finance_complaint.entity.schema import FinanceDataSchema
 from pyspark.sql import DataFrame
