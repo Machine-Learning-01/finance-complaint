@@ -14,11 +14,14 @@ ENV PYSPARK_DRIVER_PYTHON python3
 ENV PYSPARK_PYTHON python3
 RUN pip3 install --upgrade pip
 RUN pip3 install numpy pandas
-RUN mkdir app
-COPY ./finance_complaint app/
+RUN mkdir /app
+RUN mkdir /app/finance_complaint/
+COPY ./finance_complaint /app/finance_complaint/
 COPY ./requirements.txt /app
 COPY ./setup.py /app
 COPY ./main.py /app
 COPY ./start.sh /app
 WORKDIR /app/
+RUN python3 -m venv venv
+RUN source  venv/bin/activate
 RUN pip3 install -r requirements.txt
