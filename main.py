@@ -11,8 +11,9 @@ def start_training(start=False):
     try:
         if not start:
             return None
-        #TrainingPipeline(FinanceConfig()).start()
         print("Training Running")
+        TrainingPipeline(FinanceConfig()).start()
+        
     except Exception as e:
         raise FinanceException(e, sys)
 
