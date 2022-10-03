@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from finance_complaint.constant import TIMESTAMP
 
-S3_DATA_BUCKET_NAME = "finance-complaint"
+S3_DATA_BUCKET_NAME = "finance-cat-service"
 ROOT_DATA_DIR_NAME = "finance_data"
 ARCHIVE_DIR_NAME = "archive"
 INPUT_DIR_NAME = "input"

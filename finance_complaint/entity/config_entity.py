@@ -1,5 +1,6 @@
 from collections import namedtuple
-from finance_complaint.constant.prediction_pipeline_config.file_config import ARCHIVE_DIR, INPUT_DIR, FAILED_DIR, PREDICTION_DIR, REGION_NAME
+from finance_complaint.constant.prediction_pipeline_config.file_config import ARCHIVE_DIR, INPUT_DIR, FAILED_DIR, \
+    PREDICTION_DIR, REGION_NAME
 
 TrainingPipelineConfig = namedtuple("PipelineConfig", ["pipeline_name", "artifact_dir"])
 

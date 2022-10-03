@@ -12,12 +12,11 @@ RUN python3 -V
 
 ENV PYSPARK_DRIVER_PYTHON python3
 ENV PYSPARK_PYTHON python3
-
+ENV TRAINING False
+ENV PREDICTION False
 RUN pip3 install --upgrade pip
 RUN pip3 install numpy pandas
 RUN mkdir app
 COPY ./ app/
 WORKDIR app/
 RUN pip3 install -r requirements.txt
-
-CMD ["python3","main.py","--t","True"]

@@ -5,48 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2af4ee9-e006-43aa-b5dc-85463903850d" name="Changes" comment="Basic structured done.">
-      <change afterPath="$PROJECT_DIR$/finance_complaint/component/prediction/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/component/training/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/config/pipeline/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/config/pipeline/prediction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/config/pipeline/training.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/database/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/environment/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/model/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/prediction_pipeline_config/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance_complaint/constant/training_pipeline_config/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_ingestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/training/data_ingestion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/training/data_transformation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/data_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/training/data_validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/model_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/training/model_evaluation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/model_pusher.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/training/model_pusher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/component/model_trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/component/training/model_trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/config/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/config/aws_connection_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/config/aws_connection_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/config/mongo_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/config/mongo_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/config/spark_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/config/spark_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/data_ingestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/training_pipeline_config/data_ingestion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/data_transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/training_pipeline_config/data_transformation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/data_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/training_pipeline_config/data_validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/env_var_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/environment/variable_key.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/model_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/training_pipeline_config/model_evaluation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/model_pusher.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/training_pipeline_config/model_pusher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/model_trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/training_pipeline_config/model_trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/pred_file_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/prediction_pipeline_config/file_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/model/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/model/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance_complaint/constant/prediction_pipeline_config/file_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/constant/prediction_pipeline_config/file_config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance_complaint/entity/config_entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/config_entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/estimator.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/estimator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/entity/metadata_entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/entity/metadata_entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/pipeline/prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/pipeline/prediction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance_complaint/pipeline/training.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance_complaint/pipeline/training.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +47,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/avnish/iNeuron_Private_Intelligence_Limited/industry_ready_project/projects/finance_complaint/venv/bin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/avnish/iNeuron_Private_Intelligence_Limited/industry_ready_project/projects/data_pipeline/kafka-sensor&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>

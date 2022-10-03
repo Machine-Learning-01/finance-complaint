@@ -7,3 +7,4 @@ saved_models/*
 /logs/
 venv/*
 credential.txt
+.env

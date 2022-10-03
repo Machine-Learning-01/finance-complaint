@@ -42,7 +42,7 @@ pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 -f https://download.py
 docker build -t fc:lts .
 ```
 ```
-docker run -it -p  8080:4040 -v $(pwd)/finance_artifact:/app/finance_artifact fc:lts bash
+docker run -it -v $(pwd)/finance_artifact:/finance_artifact --env-file=$(pwd)/.env fc:lts bash start.sh
 ```
 ```
 spark-submit --packages=org.apache.hadoop:hadoop-aws:2.7.3 main.py

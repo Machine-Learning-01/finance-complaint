@@ -11,8 +11,8 @@ def start_training(start=False):
     try:
         if not start:
             return None
-        TrainingPipeline(FinanceConfig()).start()
-
+        #TrainingPipeline(FinanceConfig()).start()
+        print("Training Running")
     except Exception as e:
         raise FinanceException(e, sys)
 
@@ -21,8 +21,8 @@ def start_prediction(start=False):
     try:
         if not start:
             return None
-        PredictionPipeline().start_batch_prediction()
-
+        #PredictionPipeline().start_batch_prediction()
+        print("Prediction started")
     except Exception as e:
         raise FinanceException(e, sys)
 

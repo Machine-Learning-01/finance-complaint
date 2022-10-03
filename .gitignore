@@ -7,7 +7,8 @@ airflow/*
 *.so
 credential.txt
 .gitconfig
-
+.env
+saved_models/*
 .jupyter
 .local
 .ssh

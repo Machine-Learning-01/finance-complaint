@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.ImputerModel","timestamp":1664010565865,"sparkVersion":"3.2.1","uid":"Imputer_58b808882817","paramMap":{"inputCols":["diff_in_days"],"outputCols":["im_diff_in_days"]},"defaultParamMap":{"relativeError":0.001,"outputCol":"ImputerModel_b7ff2d0b9497__output","missingValue":"NaN","strategy":"mean"}}
