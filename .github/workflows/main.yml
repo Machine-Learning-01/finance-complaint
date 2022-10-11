@@ -50,8 +50,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: $GAR_LOCATION-docker.pkg.dev
-          username: oauth2accesstoken
-          password: ${{ steps.auth.outputs.access_token }}
+          username: _json_key
+          password: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Docker build
         run: docker build --tag $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
