@@ -49,7 +49,7 @@ jobs:
       - name: Login to Artifact Registry
         uses: docker/login-action@v1
         with:
-          registry: $GAR_LOCATION-docker.pkg.dev
+          registry: asia.gcr.io
           username: _json_key
           password: ${{ secrets.GOOGLE_CREDENTIALS }}
 
