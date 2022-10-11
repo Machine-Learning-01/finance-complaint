@@ -1,0 +1,69 @@
+name: Continuous Integration and Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+
+permissions:
+  id-token: write
+  contents: read
+
+
+jobs:
+  integration:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Lint code
+        run: echo "Linting repository"
+
+      - name: Run unit tests
+        run: echo "Running unit tests"
+
+
+  build-and-push-image:
+    name: Continuous Build and Delivery
+    needs: integration
+    runs-on: ubuntu-latest
+    env:
+      REPOSITORY: finance-complaint
+      IMAGE_NAME: finance-complaint
+      IMAGE_TAG: latest
+      PROJECT_ID: our-velocity-363109
+      GAR_LOCATION: asia-south1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+          token_format: 'access_token'
+
+      - name: Login to Artifact Registry
+        uses: docker/login-action@v1
+        with:
+          registry: $GAR_LOCATION-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Docker build
+        run: docker build --tag $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+
+      - name: Docker Push
+        run: docker push $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+
+
+
+
+
+
+
+
