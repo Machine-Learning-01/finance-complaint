@@ -54,7 +54,7 @@ jobs:
           password: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Docker build
-        run: docker build --tag $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+        run: docker build -t $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG .
 
       - name: Docker Push
         run: docker push $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
