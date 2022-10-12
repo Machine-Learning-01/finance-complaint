@@ -8,3 +8,4 @@ saved_models/*
 venv/*
 credential.txt
 .env
+../.idea/

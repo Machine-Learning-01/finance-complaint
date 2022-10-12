@@ -16,6 +16,7 @@ saved_models/*
 finance_artifact/*
 # Distribution / packaging
 .Python
+.idea/
 build/
 develop-eggs/
 dist/

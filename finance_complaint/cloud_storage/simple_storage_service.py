@@ -1,7 +1,9 @@
+import os
+import sys
+from typing import List
+
 from finance_complaint.config.aws_connection_config import AWSConnectionConfig
 from finance_complaint.exception import FinanceException
-import os, sys
-from typing import List
 
 
 class SimpleStorageService:
@@ -61,14 +63,14 @@ class SimpleStorageService:
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def download_file(self,s3_key,local_file_path):
+    def download_file(self, s3_key, local_file_path):
         try:
-            self.client.download_file(self.bucket_name,s3_key,local_file_path)
+            self.client.download_file(self.bucket_name, s3_key, local_file_path)
         except Exception as e:
-            raise FinanceException(e,sys) from e
+            raise FinanceException(e, sys) from e
 
-    def upload_file(self,s3_key,local_file_path):
+    def upload_file(self, s3_key, local_file_path):
         try:
-            self.client.upload_file(local_file_path,self.bucket_name,s3_key)
+            self.client.upload_file(local_file_path, self.bucket_name, s3_key)
         except Exception as e:
-            raise FinanceException(e,sys) from e
+            raise FinanceException(e, sys) from e

@@ -1,27 +1,28 @@
-from finance_complaint.config.pipeline.training import FinanceConfig
-from finance_complaint.entity.config_entity import DataIngestionConfig
-from finance_complaint.exception import FinanceException
-from finance_complaint.config.spark_manager import spark_session
-import os, sys
-from finance_complaint.entity.metadata_entity import DataIngestionMetadata
-import pandas as pd
-from finance_complaint.entity.artifact_entity import DataIngestionArtifact
-from finance_complaint.logger import logger
-import requests, json
-from typing import List
-from collections import namedtuple
-import time
+import os
 import re
+import sys
+import time
 import uuid
+from collections import namedtuple
+from typing import List
+
+import json
+import pandas as pd
+import requests
+
+from finance_complaint.config.pipeline.training import FinanceConfig
+from finance_complaint.config.spark_manager import spark_session
+from finance_complaint.entity.artifact_entity import DataIngestionArtifact
+from finance_complaint.entity.config_entity import DataIngestionConfig
+from finance_complaint.entity.metadata_entity import DataIngestionMetadata
+from finance_complaint.exception import FinanceException
+from finance_complaint.logger import logger
+from datetime import datetime
 
 DownloadUrl = namedtuple("DownloadUrl", ["url", "file_path", "n_retry"])
 
-from datetime import datetime
-
 
 class DataIngestion:
-
-    # Used to download data in chunks.
     # Used to download data in chunks.
     def __init__(self, data_ingestion_config: DataIngestionConfig, n_retry: int = 5, ):
         """
@@ -37,8 +38,6 @@ class DataIngestion:
 
         except Exception as e:
             raise FinanceException(e, sys)
-
-    
 
     def get_required_interval(self):
         start_date = datetime.strptime(self.data_ingestion_config.from_date, "%Y-%m-%d")
@@ -117,7 +116,6 @@ class DataIngestion:
         except Exception as e:
             raise FinanceException(e, sys)
 
-    
     def retry_download_data(self, data, download_url: DownloadUrl):
         """
         This function help to avoid failure as it help to download failed file again

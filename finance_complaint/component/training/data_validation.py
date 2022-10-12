@@ -1,20 +1,23 @@
-from finance_complaint.exception import FinanceException
-from finance_complaint.logger import logger
+import os
+import sys
+from collections import namedtuple
+from typing import List, Dict
+
+from pyspark.sql import DataFrame
+from pyspark.sql.functions import col
+
+from finance_complaint.config.spark_manager import spark_session
 from finance_complaint.entity.artifact_entity import DataIngestionArtifact
 from finance_complaint.entity.config_entity import DataValidationConfig
-from finance_complaint.config.spark_manager import spark_session
-from pyspark.sql import DataFrame
-import os, sys
-from typing import List, Dict
-from pyspark.sql.functions import col
 from finance_complaint.entity.schema import FinanceDataSchema
-from collections import namedtuple
+from finance_complaint.exception import FinanceException
+from finance_complaint.logger import logger
 
-COMPLAINT_TABLE = "complaint"
-ERROR_MESSAGE = "error_msg"
 from pyspark.sql.functions import lit
 from finance_complaint.entity.artifact_entity import DataValidationArtifact
 
+COMPLAINT_TABLE = "complaint"
+ERROR_MESSAGE = "error_msg"
 MissingReport = namedtuple("MissingReport", ["total_row", "missing_row", "missing_percentage"])
 
 
@@ -42,12 +45,13 @@ class DataValidation(FinanceDataSchema):
             )
             logger.info(f"Data frame is created using file: {self.data_ingestion_artifact.feature_store_file_path}")
             logger.info(f"Number of row: {dataframe.count()} and column: {len(dataframe.columns)}")
-            dataframe,_ = dataframe.randomSplit([0.01,0.99])
+            dataframe, _ = dataframe.randomSplit([0.01, 0.99])
             return dataframe
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def get_missing_report(self, dataframe: DataFrame, ) -> Dict[str, MissingReport]:
+    @staticmethod
+    def get_missing_report(dataframe: DataFrame, ) -> Dict[str, MissingReport]:
         try:
             missing_report: Dict[str:MissingReport] = dict()
             logger.info(f"Preparing missing reports for each column")
