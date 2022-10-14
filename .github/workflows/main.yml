@@ -88,15 +88,8 @@ jobs:
       - name: Login to Artifact Registry
         run: gcloud auth configure-docker $GAR_LOCATION-docker.pkg.dev
 
+      - name:
+        run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin $GAR_LOCATION-docker.pkg.dev
+
       - name: Docker pull
         run: sudo docker pull $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
-
-
-
-
-
-
-
-
-
-
