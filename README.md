@@ -1,3 +1,13 @@
+# Finance-Complaint 
+
+## Architectures
+
+## WorkFLow setup
+### Step-1
+Setup secrets 
+```bash
+
+```
 Create .env file
 
 ```
