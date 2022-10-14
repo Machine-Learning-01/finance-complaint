@@ -93,3 +93,6 @@ jobs:
 
       - name: Docker pull
         run: docker pull $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+
+      - name: Run Image
+        run: docker run -it -v $(pwd)/finance_artifact:/app/finance_artifact  --env-file=$(pwd)/.env fc:lts
