@@ -89,7 +89,6 @@ class TrainingPipeline:
             model_eval_artifact = self.start_model_evaluation(data_validation_artifact=data_validation_artifact,
                                                               model_trainer_artifact=model_trainer_artifact
                                                               )
-
             if model_eval_artifact.model_accepted:
                 self.start_model_pusher(model_trainer_artifact=model_trainer_artifact)
         except Exception as e:

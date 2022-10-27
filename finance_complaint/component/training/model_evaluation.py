@@ -56,7 +56,7 @@ class ModelEvaluation:
             # Raising an exception.
             raise FinanceException(e, sys)
 
-    def evaluate_trained_model_better(self) -> ModelEvaluationArtifact:
+    def evaluate_trained_model(self) -> ModelEvaluationArtifact:
         is_model_accepted, is_active = False, False
         trained_model_file_path = self.model_trainer_artifact.model_trainer_ref_artifact.trained_model_file_path
         label_indexer_model_path = self.model_trainer_artifact.model_trainer_ref_artifact.label_indexer_model_file_path
@@ -107,7 +107,7 @@ class ModelEvaluation:
                                                                     active=is_active
                                                                     )
             else:
-                model_evaluation_artifact = self.evaluate_trained_model_better()
+                model_evaluation_artifact = self.evaluate_trained_model()
 
             logger.info(f"Model evaluation artifact: {model_evaluation_artifact}")
             self.model_eval_artifact_data.save_eval_artifact(model_eval_artifact=model_evaluation_artifact)
