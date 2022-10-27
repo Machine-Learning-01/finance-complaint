@@ -9,4 +9,6 @@ Note: This project is build completly in spark we want you to explore <b>petasto
 
 4. Use Travis CI to build CI/CD pipeline for Deployment in EC2
 5. All artifact file should be saved in any cloud storage such S3 bukcet, Azure blob storage, Google cloud storage.
+
+
 Optional: Use AWS cloud watch to log your application
