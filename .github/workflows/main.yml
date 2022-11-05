@@ -90,7 +90,7 @@ jobs:
       - name: Login to Artifact Registry
         run: gcloud auth configure-docker $GAR_LOCATION-docker.pkg.dev
 
-      - name:
+      - name: Authenticate to Artifact Registry
         run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin $GAR_LOCATION-docker.pkg.dev
 
       - name: Docker pull
