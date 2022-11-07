@@ -7,5 +7,9 @@ terraform {
 }
 
 module "finance_artifact_repository" {
-  source = "./artifact_repository"
+  source = "./finance_artifact_repository"
+}
+
+module "finance_model_bucket" {
+  source = "./finance_model_bucket"
 }
