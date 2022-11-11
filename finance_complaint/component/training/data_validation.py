@@ -70,7 +70,7 @@ class DataValidation(FinanceDataSchema):
         except Exception as e:
             raise FinanceException(e, sys)
 
-    def get_unwanted_and_high_missing_value_columns(self, dataframe: DataFrame, threshold: float = 0.2) -> List[str]:
+    def get_unwanted_and_high_missing_value_columns(self, dataframe: DataFrame, threshold: float = 0.3) -> List[str]:
         try:
             missing_report: Dict[str, MissingReport] = self.get_missing_report(dataframe=dataframe)
 

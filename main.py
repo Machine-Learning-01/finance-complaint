@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 access_key_id = os.getenv(AWS_ACCESS_KEY_ID_ENV_KEY, )
 secret_access_key = os.getenv(AWS_SECRET_ACCESS_KEY_ENV_KEY, )
-print(access_key_id,secret_access_key)
+#print(access_key_id,secret_access_key)
 import argparse
 from finance_complaint.exception import FinanceException
 from finance_complaint.pipeline import TrainingPipeline, PredictionPipeline
