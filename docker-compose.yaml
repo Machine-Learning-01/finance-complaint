@@ -1,0 +1,13 @@
+version: "2"
+services:
+  application:
+    image: ${IMAGE_NAME}
+    container_name: finance-complaint
+    ports:
+      - "8080:8080"
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - MONGO_DB_URL=${MONGO_DB_URL}
+  

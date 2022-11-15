@@ -93,8 +93,13 @@ jobs:
       - name:
         run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin $GAR_LOCATION-docker.pkg.dev
 
-      - name: Docker pull
-        run: docker pull $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+      - name: Pull docker image
+        run: |
+         docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+      - name: Run Docker Image to serve users
+        run: |
+         export IMAGE_NAME=$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}" MONGO_DB_URL="${{ secrets.MONGO_DB_URL }}"  AWS_DEFAULT_REGION=${{ secrets.AWS_REGION }} && docker compose up -d
+      - name: Docker System Prune to Remove Old Images
+        run: |
+         docker system prune -f
 
-      - name: Run Image
-        run: echo docker run -it -v /home/data/finance_artifact:/app/finance_artifact -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e MONGO_DB_URL="${{ secrets.MONGO_DB_URL }}" -e TRAINING=$TRAINING -e PREDICTION=$PREDICTION $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG

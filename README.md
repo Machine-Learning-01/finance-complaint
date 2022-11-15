@@ -30,3 +30,41 @@ Lauch docker image
 ```
 docker run -it -v $(pwd)/finance_artifact:/app/finance_artifact  --env-file=$(pwd)/.env fc:lts
 ```
+
+
+AIRFLOW SETUP
+
+## How to setup airflow
+
+Set airflow directory
+```
+export AIRFLOW_HOME="/home/avnish/census_consumer_project/census_consumer_complaint/airflow"
+```
+
+To install airflow 
+```
+pip install apache-airflow
+```
+
+To configure databse
+```
+airflow db init
+```
+
+To create login user for airflow
+```
+airflow users create  -e avnish@ineuron.ai -f Avnish -l Yadav -p admin -r Admin  -u admin
+```
+To start scheduler
+```
+airflow scheduler
+```
+To launch airflow server
+```
+airflow webserver -p <port_number>
+```
+
+Update in airflow.cfg
+```
+enable_xcom_pickling = True
+```
