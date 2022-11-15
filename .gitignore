@@ -3,7 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 airflow/*
+.vscode
 # C extensions
+.terraform.lock.hcl
+.terraform
 *.so
 credential.txt
 .gitconfig
