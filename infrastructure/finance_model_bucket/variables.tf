@@ -17,3 +17,8 @@ variable "force_destroy_bucket" {
   type    = bool
   default = true
 }
+
+variable "iam_policy_principal_type" {
+  type    = string
+  default = "AWS"
+}

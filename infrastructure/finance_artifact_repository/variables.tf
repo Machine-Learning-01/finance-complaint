@@ -1,5 +1,5 @@
 variable "artifact_repository_iam_role_binding" {
-  default = "roles/artifactregistry.reader"
+  default = "roles/artifactregistry.writer"
   type    = string
 }
 
@@ -26,5 +26,4 @@ variable "artifact_repository_repository_id" {
 variable "artifact_repository_format" {
   default = "DOCKER"
   type    = string
-
 }

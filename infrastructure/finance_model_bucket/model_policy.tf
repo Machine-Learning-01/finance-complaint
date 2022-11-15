@@ -6,7 +6,7 @@ resource "aws_s3_bucket_policy" "allow_full_access" {
 data "aws_iam_policy_document" "allow_full_access" {
   statement {
     principals {
-      type        = "AWS"
+      type        = var.iam_policy_principal_type
       identifiers = [var.aws_account_id]
     }
 

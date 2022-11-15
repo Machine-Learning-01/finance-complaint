@@ -13,3 +13,7 @@ module "finance_artifact_repository" {
 module "finance_model_bucket" {
   source = "./finance_model_bucket"
 }
+
+module "finance_virtual_machine" {
+  source = "./finance_virtual_machine"
+}
