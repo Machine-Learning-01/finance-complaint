@@ -20,6 +20,8 @@ services:
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
       - MONGO_DB_URL=${MONGO_DB_URL}
+    volumes:
+      - "./airflow/logs:/app/airflow/logs"
 
 
   influxdb:
