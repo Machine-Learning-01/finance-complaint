@@ -1,0 +1,25 @@
+# FROM openjdk:20-slim-buster
+
+ENV AIRFLOW_HOME="/app/airflow"
+ENV AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=300
+ENV AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True
+#RUN yum -y update && yum -y install yum-utils && yum -y groupinstall development && yum -y install awscli  && yum list python3*  && yum -y install python3 python3-dev python3-pip python3-virtualenv
+RUN apt update -y && apt-get install python3-pip python3-setuptools python3.7-venv -y
+#RUN python -V
+RUN python3 -V
+ENV PYSPARK_DRIVER_PYTHON python3
+ENV PYSPARK_PYTHON python3
+RUN pip3 install --upgrade pip
+RUN mkdir /app
+COPY . /app/
+WORKDIR /app/
+RUN pip3 install -r requirements.txt
+
+RUN airflow db init 
+RUN airflow users create  -e avnish@ineuron.ai -f Avnish -l Yadav -p admin -r Admin  -u admin
+
+# RUN rm airflow/airflow.cfg
+# COPY airflow/airflow.cfg airflow/airflow.cfg
+RUN chmod 777 start.sh
+ENTRYPOINT [ "/bin/sh" ]
+CMD ["start.sh"]

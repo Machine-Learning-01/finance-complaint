@@ -42,10 +42,10 @@ class DataValidation(FinanceDataSchema):
         try:
             dataframe: DataFrame = spark_session.read.parquet(
                 self.data_ingestion_artifact.feature_store_file_path
-            )
+            ).limit(10000)
             logger.info(f"Data frame is created using file: {self.data_ingestion_artifact.feature_store_file_path}")
             logger.info(f"Number of row: {dataframe.count()} and column: {len(dataframe.columns)}")
-            dataframe, _ = dataframe.randomSplit([0.01, 0.99])
+            #dataframe, _ = dataframe.randomSplit([0.001, 0.999])
             return dataframe
         except Exception as e:
             raise FinanceException(e, sys)

@@ -6,4 +6,5 @@ ipykernel==6.15.0
 boto3==1.24.82
 pandas==1.3.5
 pymongo[srv]
+apache-airflow==2.4.3
 -e .

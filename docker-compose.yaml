@@ -1,0 +1,116 @@
+version: "3"
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  prometheus_data: {}
+  influxdb-storage: {}
+  grafana-storage: {}
+
+services:
+  application:
+    image: ${IMAGE_NAME}
+    container_name: finance-complaint
+    ports:
+      - "8080:8080"
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - MONGO_DB_URL=${MONGO_DB_URL}
+    volumes:
+      - "./airflow/logs:/app/airflow/logs"
+
+
+  influxdb:
+    image: influxdb:1.7
+    container_name: influxdb
+    restart: always
+    expose:
+      - 8086
+    ports:
+     - "8086:8086"
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+    environment:
+      INFLUXDB_DB: actualdb
+
+  grafana-server:
+    image: grafana/grafana-enterprise:latest
+    container_name: grafana-server
+    restart: unless-stopped
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+    user: '104'
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    expose:
+      - 9100
+    ports:
+      - "9100:9100"
+    networks:
+      - monitoring
+
+  promtail:
+    image: grafana/promtail:2.6.1
+    container_name: promtail
+    volumes:
+      - /var/log:/var/log
+      - "./airflow/logs:/app/log/"
+      - "./docker-compose-resource/promtail:/etc/promtail/"
+    command: -config.file=/etc/promtail/config.yml
+    ports:
+     - "9080:9080"
+    networks:
+      - monitoring
+
+  loki:
+    image: grafana/loki:2.6.1
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - "./docker-compose-resource/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    expose:
+      - 9090
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
