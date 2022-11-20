@@ -2,7 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
-airflow/*
+airflow/logs/*
+airflow/airflow.db
+airflow/webserver_config.py 
+airlfow/airflow.cfg
+
+
 .vscode
 # C extensions
 .terraform.lock.hcl
