@@ -108,7 +108,7 @@ class PredictionPipeline:
             for valid_file in valid_files:
                 logger.info("Staring prediction of file: {valid_file}")
                 dataframe: DataFrame = self.read_file(valid_file)
-                dataframe = dataframe.drop(self.schema.col_consumer_disputed)
+                #dataframe = dataframe.drop(self.schema.col_consumer_disputed)
                 transformed_dataframe = estimator.transform(dataframe=dataframe)
                 required_columns = self.schema.required_prediction_columns + [self.schema.prediction_label_column_name]
                 logger.info(f"Saving required_columns: {required_columns}")

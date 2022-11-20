@@ -68,3 +68,26 @@ Update in airflow.cfg
 ```
 enable_xcom_pickling = True
 ```
+
+Steps to run project in local system
+
+
+1. Build docker image
+   ```
+   docker build -t fc:lts .
+   ```
+2. Set envment variable
+```
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+MONGO_DB_URL=
+IMAGE_NAME=fc:lts
+```
+3. To start your application
+```
+docker-compose up
+```
+4. To stop your application
+```
+docker-compose down
+``` 

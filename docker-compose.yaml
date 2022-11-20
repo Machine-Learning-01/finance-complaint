@@ -90,7 +90,7 @@ services:
     image: grafana/loki:2.6.1
     container_name: loki
     ports:
-      - "3100:3100"
+      - "3101:3100"
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - monitoring
@@ -111,6 +111,6 @@ services:
     expose:
       - 9090
     ports:
-      - "9090:9090"
+      - "9091:9090"
     networks:
       - monitoring
