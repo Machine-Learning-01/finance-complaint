@@ -22,6 +22,7 @@ services:
       - MONGO_DB_URL=${MONGO_DB_URL}
     volumes:
       - "./airflow/logs:/app/airflow/logs"
+      - "./airflow/dags:/app/airflow/dags"
 
 
   influxdb:

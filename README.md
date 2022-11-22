@@ -78,10 +78,11 @@ Steps to run project in local system
    ```
 2. Set envment variable
 ```
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-MONGO_DB_URL=
-IMAGE_NAME=fc:lts
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export MONGO_DB_URL=
+export AWS_DEFAULT_REGION="ap-south-1"
+export IMAGE_NAME=fc:lts
 ```
 3. To start your application
 ```
