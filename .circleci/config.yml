@@ -51,7 +51,7 @@ jobs:
 
   continuous-deployment:
     machine: true
-    resource_class: machine-learning-01/finance
+    resource_class: machine-learning-01/self-hosted-machine
     environment:
       REPOSITORY: finance-complaint
       GAR_IMAGE_NAME: finance-complaint
