@@ -63,6 +63,8 @@ jobs:
       AWS_DEFAULT_REGION: "ap-south-1"
       MONGO_DB_URL: ${MONGO_DB_URL}
     steps:
+      - checkout
+      
       - run:
           name: google cloud authentication
           command: |
