@@ -49,15 +49,14 @@ jobs:
           name: push to private repository
           command: docker push $GOOGLE_COMPUTE_ZONE-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG 
 
-
   continuous-deployment:
     machine: true
-    resource_class: ketangangal/self-hosted
+    resource_class: machine-learning-01/finance
     environment:
       REPOSITORY: finance-complaint
       GAR_IMAGE_NAME: finance-complaint
       IMAGE_TAG: latest
-      IMAGE_NAME: ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+      IMAGE_NAME: ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$GAR_IMAGE_NAME:$IMAGE_TAG
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_DEFAULT_REGION: "ap-south-1"
