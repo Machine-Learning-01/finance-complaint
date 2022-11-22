@@ -1,0 +1,120 @@
+version: 2.1
+
+jobs:
+  continuous-integration:
+    docker:
+      - image: cimg/base:stable
+    resource_class: medium
+    steps:
+      - checkout
+
+      - run: 
+          name: lint code
+          command: echo "Linting repository"
+
+      - run: 
+          name: run unit tests
+          command: echo "Running unit tests"
+  
+  continuous-delivery:
+    docker:
+      - image: google/cloud-sdk
+    resource_class: medium
+    environment:
+      REPOSITORY: finance-complaint
+      IMAGE_NAME: finance-complaint
+      IMAGE_TAG: latest
+    steps:
+      - checkout
+      - run:
+          name: google cloud authentication
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+
+      - run:
+          name: build and tag
+          command: docker build -t $GOOGLE_COMPUTE_ZONE-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG .
+
+      - run: 
+          name: configure docker login
+          command: gcloud auth configure-docker $GOOGLE_COMPUTE_ZONE-docker.pkg.dev
+      
+      - run:
+          name: push to private repository
+          command: docker push $GOOGLE_COMPUTE_ZONE-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG 
+
+
+  continuous-deployment:
+    machine: true
+    resource_class: ketangangal/self-hosted
+    environment:
+      REPOSITORY: finance-complaint
+      GAR_IMAGE_NAME: finance-complaint
+      IMAGE_TAG: latest
+      IMAGE_NAME: ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: "ap-south-1"
+      MONGO_DB_URL: ${MONGO_DB_URL}
+    steps:
+      - run:
+          name: google cloud authentication
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+
+      - run: 
+          name: configure docker login
+          command: gcloud auth configure-docker $GOOGLE_COMPUTE_ZONE-docker.pkg.dev
+
+      - run:
+          name: pull image from private repository
+          command: docker pull ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$GAR_IMAGE_NAME:$IMAGE_TAG 
+
+      # - run:
+      #     name: Remove Already Running Container
+      #     command: docker ps -q --filter "name=${GAR_IMAGE_NAME}" | grep -q . && docker stop ${GAR_IMAGE_NAME} && docker rm -fv ${GAR_IMAGE_NAME} || true
+
+      # - run:
+      #     name: free up system space
+      #     command: docker system prune -f
+
+      # - run:
+      #     name: start container
+      #     command: docker run --name=${IMAGE_NAME} -d -p 80:8080 -e  ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+
+      - run:
+          name: start the containers
+          command: docker-compose up
+  
+workflows:
+  CICD:
+    jobs:
+      - continuous-integration
+
+      - continuous-delivery:
+          requires:
+            - continuous-integration
+
+      - sanity-check:
+          type: approval
+          requires:
+          - continuous-delivery
+
+      - continuous-deployment:
+          requires:
+            - sanity-check
+            - continuous-integration
+            - continuous-delivery
+
+
+
+
+            
