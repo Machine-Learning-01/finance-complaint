@@ -32,7 +32,7 @@ variable "finance_protocol" {
 
 variable "finance_firewall_ports" {
   type    = list(number)
-  default = [80, 443]
+  default = [80, 443, 8080, 3000, 9100, 9090]
 }
 
 variable "finance_firewall_name" {

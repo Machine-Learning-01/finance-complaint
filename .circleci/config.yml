@@ -56,7 +56,6 @@ jobs:
       REPOSITORY: finance-complaint
       GAR_IMAGE_NAME: finance-complaint
       IMAGE_TAG: latest
-      # IMAGE_NAME: ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/finance-complaint:$IMAGE_TAG
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_DEFAULT_REGION: "ap-south-1"
@@ -64,64 +63,30 @@ jobs:
     steps:
       - checkout
         
-      # - run:
-      #     name: Check working_directory
-      #     command: pwd
-          
-      # - run:
-      #     name: google cloud authentication
-      #     command: |
-      #       echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-      #       gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-      #       gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-
-      # - run: 
-      #     name: configure docker login
-      #     command: gcloud auth configure-docker $GOOGLE_COMPUTE_ZONE-docker.pkg.dev
-
-      # - run:
-      #     name: pull image from private repository
-      #     command: docker pull ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$GAR_IMAGE_NAME:$IMAGE_TAG 
-
-      # - run:
-      #     name: Remove Already Running Container
-      #     command: docker ps -q --filter "name=${GAR_IMAGE_NAME}" | grep -q . && docker stop ${GAR_IMAGE_NAME} && docker rm -fv ${GAR_IMAGE_NAME} || true
-
-      # - run:
-      #     name: free up system space
-      #     command: docker system prune -f
-
-      # - run:
-      #     name: start container
-      #     command: docker run --name=${IMAGE_NAME} -d -p 80:8080 -e  ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
       - run: 
           name: Set env variable
           command: echo 'export IMAGE_NAME="${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/finance-complaint:$IMAGE_TAG"' >> "$BASH_ENV"
-          
-      - run:
-          name: Check env variable
-          command: echo $IMAGE_NAME
 
       - run:
           name: start the containers
-          command: docker-compose up
+          command: docker-compose up -d
   
 workflows:
   CICD:
     jobs:
-      # - continuous-integration
+      - continuous-integration
 
-      # - continuous-delivery:
-      #     requires:
-      #       - continuous-integration
+      - continuous-delivery:
+          requires:
+            - continuous-integration
 
-      # - sanity-check:
-      #     type: approval
-      #     requires:
-      #     - continuous-delivery
+      - sanity-check:
+          type: approval
+          requires:
+          - continuous-delivery
 
-      - continuous-deployment
-          # requires:
-          #   - sanity-check
-          #   - continuous-integration
-          #   - continuous-delivery
+      - continuous-deployment:
+          requires:
+            - sanity-check
+            - continuous-integration
+            - continuous-delivery
