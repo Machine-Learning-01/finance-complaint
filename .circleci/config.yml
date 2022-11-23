@@ -98,7 +98,7 @@ jobs:
       - run:
           name: start the containers
           command: |
-            cd /var/home/circleci/workdir/finance-complaint
+            cd finance-complaint
             pwd
             docker-compose up
   
