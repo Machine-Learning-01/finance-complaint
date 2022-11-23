@@ -61,9 +61,10 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_DEFAULT_REGION: "ap-south-1"
       MONGO_DB_URL: ${MONGO_DB_URL}
+
+    working_directory: "/home/cloud"
     steps:
       - checkout:
-          path: "cd/home/cloud"
 
       - run:
           name: google cloud authentication
@@ -94,7 +95,10 @@ jobs:
 
       - run:
           name: start the containers
-          command: docker-compose up
+          command: |
+            cd /home/cloud/finance-complaint
+            pwd
+            docker-compose up
   
 workflows:
   CICD:
