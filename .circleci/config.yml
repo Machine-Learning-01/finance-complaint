@@ -96,7 +96,11 @@ jobs:
       #     command: docker run --name=${IMAGE_NAME} -d -p 80:8080 -e  ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
       - run: 
           name: Set env variable
-          command: export IMAGE_NAME=${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/finance-complaint:$IMAGE_TAG
+          command: export IMAGE_NAME="${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/finance-complaint:$IMAGE_TAG"
+
+      - run:
+          name: Check env variable
+          command: echo $IMAGE_NAME
 
       - run:
           name: start the containers
