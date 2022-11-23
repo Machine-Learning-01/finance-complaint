@@ -64,24 +64,24 @@ jobs:
     steps:
       - checkout
         
-      - run:
-          name: Check working_directory
-          command: pwd
+      # - run:
+      #     name: Check working_directory
+      #     command: pwd
           
-      - run:
-          name: google cloud authentication
-          command: |
-            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      # - run:
+      #     name: google cloud authentication
+      #     command: |
+      #       echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+      #       gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+      #       gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 
-      - run: 
-          name: configure docker login
-          command: gcloud auth configure-docker $GOOGLE_COMPUTE_ZONE-docker.pkg.dev
+      # - run: 
+      #     name: configure docker login
+      #     command: gcloud auth configure-docker $GOOGLE_COMPUTE_ZONE-docker.pkg.dev
 
-      - run:
-          name: pull image from private repository
-          command: docker pull ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$GAR_IMAGE_NAME:$IMAGE_TAG 
+      # - run:
+      #     name: pull image from private repository
+      #     command: docker pull ${GOOGLE_COMPUTE_ZONE}-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$GAR_IMAGE_NAME:$IMAGE_TAG 
 
       # - run:
       #     name: Remove Already Running Container
@@ -99,6 +99,7 @@ jobs:
           name: start the containers
           command: |
             pwd
+            ls
             cd finance-complaint
             pwd
             docker-compose up
