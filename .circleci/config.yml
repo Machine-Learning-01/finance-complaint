@@ -61,10 +61,10 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_DEFAULT_REGION: "ap-south-1"
       MONGO_DB_URL: ${MONGO_DB_URL}
-
     working_directory: "/home/cloud/"
     steps:
-      - checkout
+      - checkout:
+          path: "/home/cloud"
 
       - run:
           name: google cloud authentication
