@@ -98,6 +98,7 @@ jobs:
       - run:
           name: start the containers
           command: |
+            pwd
             cd finance-complaint
             pwd
             docker-compose up
