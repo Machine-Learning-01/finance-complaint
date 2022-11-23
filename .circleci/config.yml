@@ -61,6 +61,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_DEFAULT_REGION: "ap-south-1"
       MONGO_DB_URL: ${MONGO_DB_URL}
+    working_directory: "/home/cloud/test/"
     steps:
       - checkout
         
@@ -105,19 +106,19 @@ jobs:
 workflows:
   CICD:
     jobs:
-      - continuous-integration
+      # - continuous-integration
 
-      - continuous-delivery:
-          requires:
-            - continuous-integration
+      # - continuous-delivery:
+      #     requires:
+      #       - continuous-integration
 
-      - sanity-check:
-          type: approval
-          requires:
-          - continuous-delivery
+      # - sanity-check:
+      #     type: approval
+      #     requires:
+      #     - continuous-delivery
 
-      - continuous-deployment:
-          requires:
-            - sanity-check
-            - continuous-integration
-            - continuous-delivery
+      - continuous-deployment
+          # requires:
+          #   - sanity-check
+          #   - continuous-integration
+          #   - continuous-delivery
