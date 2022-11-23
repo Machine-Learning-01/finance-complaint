@@ -61,7 +61,6 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_DEFAULT_REGION: "ap-south-1"
       MONGO_DB_URL: ${MONGO_DB_URL}
-    working_directory: "/home/cloud/test/"
     steps:
       - checkout
         
@@ -99,7 +98,7 @@ jobs:
       - run:
           name: start the containers
           command: |
-            cd /home/cloud/finance-complaint
+            cd /var/home/circleci/workdir/finance-complaint
             pwd
             docker-compose up
   
