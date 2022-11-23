@@ -97,12 +97,7 @@ jobs:
 
       - run:
           name: start the containers
-          command: |
-            pwd
-            ls
-            cd finance-complaint
-            pwd
-            docker-compose up
+          command: docker-compose up
   
 workflows:
   CICD:
