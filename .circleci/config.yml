@@ -64,8 +64,8 @@ jobs:
 
     working_directory: "/home/cloud"
     steps:
-      - checkout:
-
+      - checkout
+      
       - run:
           name: google cloud authentication
           command: |
