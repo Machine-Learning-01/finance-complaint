@@ -62,8 +62,12 @@ jobs:
       AWS_DEFAULT_REGION: "ap-south-1"
       MONGO_DB_URL: ${MONGO_DB_URL}
     steps:
-      - checkout
-      
+      - run: 
+          name: checkout the repo 
+          command: |
+              cd /home/cloud
+              git clone -b "$CIRCLE_BRANCH" "$CIRCLE_REPOSITORY_URL"
+
       - run:
           name: google cloud authentication
           command: |
