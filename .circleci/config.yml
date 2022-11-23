@@ -66,7 +66,7 @@ jobs:
           name: checkout the repo 
           command: |
               cd /home/cloud
-              git clone -b "$CIRCLE_BRANCH" "$CIRCLE_REPOSITORY_URL"
+              sudo git clone -b "$CIRCLE_BRANCH" "$CIRCLE_REPOSITORY_URL"
 
       - run:
           name: google cloud authentication
