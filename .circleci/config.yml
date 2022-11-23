@@ -51,7 +51,7 @@ jobs:
 
   continuous-deployment:
     machine: true
-    resource_class: machine-learning-01/self-hosted-machine
+    resource_class: machine-learning-01/self-hosted-1
     environment:
       REPOSITORY: finance-complaint
       GAR_IMAGE_NAME: finance-complaint
@@ -114,8 +114,3 @@ workflows:
             - sanity-check
             - continuous-integration
             - continuous-delivery
-
-
-
-
-            
