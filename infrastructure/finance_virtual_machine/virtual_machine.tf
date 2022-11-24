@@ -10,7 +10,7 @@ resource "google_compute_instance" "finance_compute_instance" {
   }
 
   network_interface {
-    network = var.finance_network_interface
+    network = google_compute_network.finance_compute_network.name
 
     access_config {
     }
@@ -20,7 +20,9 @@ resource "google_compute_instance" "finance_compute_instance" {
     email  = google_service_account.finance_service_account.email
     scopes = [var.finance_compute_service_account_scopes]
   }
-  tags = var.finance_compute_firewall_tags
+
+  tags = ["http-server", "https-server", var.finance_firewall_name]
+
   depends_on = [
     google_compute_firewall.finance_compute_firewall
   ]

@@ -18,10 +18,5 @@ resource "google_compute_firewall" "finance_compute_firewall" {
     protocol = var.finance_protocol
     ports    = var.finance_firewall_ports
   }
+  target_tags = [var.finance_firewall_name]
 }
-
-
-
-
-
-

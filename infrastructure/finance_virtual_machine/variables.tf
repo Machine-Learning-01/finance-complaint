@@ -4,9 +4,8 @@ variable "finance_network_name" {
 }
 
 variable "finance_compute_network_name" {
-  type        = string
-  default     = "finance-network"
-  description = "description"
+  type    = string
+  default = "finance-network"
 }
 
 
@@ -31,8 +30,8 @@ variable "finance_protocol" {
 }
 
 variable "finance_firewall_ports" {
-  type    = list(number)
-  default = [80, 443, 8080, 3000, 9100, 9090]
+  type    = list(string)
+  default = ["22", "80", "443", "8080", "3000", "9100", "9090"]
 }
 
 variable "finance_firewall_name" {
@@ -73,7 +72,7 @@ variable "finance_compute_instance_name" {
 
 variable "finance_compute_instance_compute_type" {
   type    = string
-  default = "e2-medium"
+  default = "c2-standard-4"
 }
 
 variable "finance_compute_instance_zone" {
@@ -94,10 +93,4 @@ variable "finance_network_interface" {
 variable "finance_compute_service_account_scopes" {
   type    = string
   default = "cloud-platform"
-}
-
-variable "finance_compute_firewall_tags" {
-  type    = list(string)
-  default = ["http-server", "https-server"]
-
 }
