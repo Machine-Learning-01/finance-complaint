@@ -11,7 +11,8 @@ volumes:
 
 services:
   application:
-    image: ${IMAGE_NAME}
+    build: .
+    #image: ${IMAGE_NAME}
     container_name: finance-complaint
     ports:
       - "8080:8080"
@@ -22,9 +23,7 @@ services:
       - MONGO_DB_URL=${MONGO_DB_URL}
     volumes:
       - "./airflow/logs:/app/airflow/logs"
-      - "./airflow/dags:/app/airflow/dags"
-
-
+      
   influxdb:
     image: influxdb:1.7
     container_name: influxdb
