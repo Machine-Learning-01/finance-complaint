@@ -1,0 +1,63 @@
+version: 2.1
+
+jobs:
+  init:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          name: Initialise Terraform
+          command: |
+            terraform -chdir==infrastructure/ init
+    
+  format:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Format Terraform Files
+          command: |
+            terraform -chdir=infrastructure/ fmt -recursive
+
+  plan:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - run:
+          name: Plan the infrastructure 
+          command: |
+            terraform -chdir=infrastructure/ plan
+
+  # apply:
+  #   docker:
+  #     - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+  #   steps:
+  #     - run:
+  #         name: terraform apply 
+  #         command: |
+            # terraform -chdir=infrastructure/ apply -auto-approve 
+            
+workflows:
+  version: 2.1
+  plan_approve_apply:
+    jobs:
+      - checkout
+      - init:
+          requires:
+            - checkout
+      - fmt:
+          requires:
+            - init
+      - plan:
+          requires:
+            - fmt
+      - wait-for-approval:
+          type: approval
+          requires:
+            - plan
+      # - apply:
+      #     requires:
+      #       - wait-for-approval
