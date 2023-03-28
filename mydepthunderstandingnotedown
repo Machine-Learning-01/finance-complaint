@@ -1,0 +1,8 @@
+export variable="value"
+
+mongodb for storing artifacts
+aws for data. we use s3 bucket
+
+in data ingestion artifacts face. according to time stamps we download file. 
+and store in downloaded folder if passed else in failed folder.
+then we will convert to parquet and store in feature store and then we will delete the file from downloaded folder.
